@@ -2,10 +2,27 @@
 
 namespace App\Models;
 
+use App\Observers\ApplicationScoreObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Application extends Model
 {
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    public function contest(): BelongsTo
+    {
+        return $this->belongsTo(Contest::class);
+    }
+
+    protected function score(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $attributes['bac_average'] * $this->contest()->first()->bac_factor + $attributes['grad_average'] * $this->contest()->first()->grad_factor
+        );
+    }
+
     protected function casts(): array
     {
         return [

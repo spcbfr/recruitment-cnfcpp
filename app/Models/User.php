@@ -3,15 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasFactory, Notifiable ;
 
     /**
      * The attributes that are mass assignable.
@@ -35,6 +36,17 @@ class User extends Authenticatable
         'two_factor_recovery_codes',
         'remember_token',
     ];
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if($panel->getId() == "admin"){
+            return $this->is_admin;
+        }
+        if($panel->getId() == "app") {
+            return !$this->is_admin;
+        }
+        return false;
+
+    }
 
     /**
      * Get the attributes that should be cast.

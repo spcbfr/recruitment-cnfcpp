@@ -9,6 +9,9 @@ return new class extends Migration {
     {
         Schema::create('contests', function (Blueprint $table) {
             $table->id();
+            $table->integer("bac_factor");
+            $table->integer("grad_factor");
+            $table->string('name');
             $table->dateTime('ends_at');
             $table->timestamps();
         });

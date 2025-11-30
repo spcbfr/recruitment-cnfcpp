@@ -1,73 +1,72 @@
 export interface CandidateData {
-    // Section I: Personal Info
-    fullName: string;
+    tel: string;
+    position: string | readonly string[] | number | undefined;
+    full_name: string;
     gender: 'male' | 'female' | '';
-    birthDate: string;
-    birthPlace: string;
+    birth_date: string;
+    birth_place: string;
     address: string;
     governorate: string;
-    postalCode: string;
+    postal_code: string;
     cin: string;
-    cinDate: string;
-    socialSecurityType: 'cnss' | 'cnrps' | 'none' | '';
-    cnssNumber: string;
-    mobile: string;
+    cin_date: string;
+    social_security_type: 'cnss' | 'cnrps' | 'none' | '';
+    cnss_number: string;
     email: string;
 
-    // Section II: Civil Status
-    maritalStatus: string;
-    militaryStatus: string;
-    spouseName: string;
-    spouseProfession: string;
-    spouseWorkplace: string;
-    childrenCount: string;
+// Section II: Civil Status
+    marital_status: string;
+    military_status: string;
+    spouse_name: string;
+    spouse_profession: string;
+    spouse_workplace: string;
+    children_count: string;
 
-    // Section III: Education
+// Section III: Education
     degree: string;
     specialty: string;
-    graduationYear: string;
-    equivalenceDecision: string;
-    equivalenceDate: string;
+    graduation_year: string;
+    equivalence_decision: string;
+    equivalence_date: string;
 
-    // Bac Details
-    bacAverage: string;
-    bacSpecialty: string;
-    bacYear: string;
+// Bac Details
+    bac_average: string;
+    bac_specialty: string;
+    bac_year: string;
 
-    gradAverage: string;
-    targetPositionNumber: string;
+    grad_average: string;
 }
 
 export const INITIAL_DATA: CandidateData = {
-    fullName: '',
+    name: '',
     gender: '',
-    birthDate: '',
-    birthPlace: '',
+    birth_date: '',
+    birth_place: '',
     address: '',
     governorate: '',
-    postalCode: '',
+    postal_code: '',
     cin: '',
-    cinDate: '',
-    socialSecurityType: '',
-    cnssNumber: '',
-    mobile: '',
+    tel: '',
+    cin_date: '',
+    social_security_type: '',
+    cnss_number: '',
     email: '',
-    maritalStatus: '',
-    militaryStatus: '',
-    spouseName: '',
-    spouseProfession: '',
-    spouseWorkplace: '',
-    childrenCount: '',
+    marital_status: '',
+    military_status: '',
+    spouse_name: '',
+    spouse_profession: '',
+    spouse_workplace: '',
+    children_count: '',
     degree: '',
     specialty: '',
-    graduationYear: '',
-    equivalenceDecision: '',
-    equivalenceDate: '',
-    bacAverage: '',
-    bacSpecialty: '',
-    bacYear: '',
-    gradAverage: '',
-    targetPositionNumber: '',
+    graduation_year: '',
+    equivalence_decision: '',
+    equivalence_date: '',
+    bac_average: '',
+    bac_specialty: '',
+    bac_year: '',
+    position: "",
+    grad_average: '',
 };
 
 export const TUNISIAN_GOVERNORATES = [

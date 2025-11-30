@@ -1,15 +1,18 @@
 <?php
 
+use App\Models\Contest;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('applications', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Position::class);
             $table->id();
+            $table->foreignIdFor(Contest::class);
+            $table->string('position');
             $table->string('name');
             $table->string('gender');
             $table->date('birth_date');
@@ -17,7 +20,7 @@ return new class extends Migration {
             $table->string('address');
             $table->string('governorate');
             $table->unsignedSmallInteger('postal_code');
-            $table->integer('cin');
+            $table->integer('cin')->unique();
             $table->date('cin_date');
             $table->string('social_security_type');
             $table->integer('cnss_number');

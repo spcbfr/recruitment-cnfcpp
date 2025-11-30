@@ -2,19 +2,13 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { CandidateData, INITIAL_DATA, TUNISIAN_GOVERNORATES, BAC_SPECIALTIES } from './types';
 import { InputGroup, SelectGroup } from './InputGroup';
 import { SectionHeader } from './SectionHeader';
-import { Check, Send, Mail, Clock, AlertTriangle, XCircle, CheckCircle, Info } from 'lucide-react';
-import { db, StoredCandidate, Position, ScoreConfig } from './utils/storage';
-import { Form } from '@inertiajs/react';
+import {  Send,  Clock, AlertTriangle  } from 'lucide-react';
+import { Form, usePage } from '@inertiajs/react';
 
 export const RecruitmentForm: React.FC = (deadlineDate) => {
     const [data, setData] = useState<CandidateData>(INITIAL_DATA);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [savedCandidate, setSavedCandidate] = useState<StoredCandidate | null>(null);
+    const { errors } = usePage().props;
 
-    // Position Validation State
-
-    // Config State
-    const [scoreConfig, setScoreConfig] = useState<ScoreConfig | null>(null);
 
     // Countdown State
     const [deadline] = useState<Date>(() => {
@@ -62,13 +56,13 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
         const value = e.target.value as any;
         setData(prev => ({
             ...prev,
-            socialSecurityType: value,
-            cnssNumber: value === 'none' ? '' : prev.cnssNumber
+            social_security_type: value,
+            cnss_number: value === 'none' ? '' : prev.cnss_number
         }));
     }, []);
 
     return (
-        <Form  action="/apply" method={"POST"} className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <Form  action="/apply" method="POST" className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             {/* Header */}
             <div className="bg-gradient-to-l from-primary-800 to-primary-600 p-8 text-white text-center">
                 <h1 className="text-3xl font-extrabold mb-2">استمارة الترشح</h1>
@@ -116,26 +110,19 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                 )}
             </div>
 
-            {scoreConfig && (
-                <div className="mx-6 md:mx-10 mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4 flex flex-col md:flex-row gap-4 items-start animate-fadeIn">
-                    <div className="bg-blue-100 p-2 rounded-full text-blue-600 shrink-0">
-                        <Info size={24} />
-                    </div>
-                    <div>
-                        <h3 className="font-bold text-blue-900 mb-2">طاقة الاستيعاب ومراحل المناظرة</h3>
-                        <ul className="list-disc list-inside text-sm text-blue-800 space-y-1">
-                            <li>
-                                سيتم دعوة أفضل <strong>{scoreConfig.writtenExamCount}</strong> مترشحاً (N) لاجتياز <strong>الاختبار الكتابي</strong>، وذلك حسب الترتيب التفاضلي للمجموع الشخصي.
-                            </li>
-                            <li>
-                                سيتم دعوة أفضل <strong>{scoreConfig.oralExamCount}</strong> مترشحين (M) لاجتياز <strong>الاختبار الشفوي</strong>، وذلك حسب نتائج الاختبار الكتابي.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            )}
 
             <div className="p-6 md:p-10 space-y-12">
+
+                {Object.keys(errors).length > 0 && (
+                    <div className="mb-4 text-left rounded-lg border border-red-300 bg-red-50 p-4 text-red-800">
+                        <ul className="list-disc text-left list-inside space-y-1">
+                            {Object.entries(errors).map(([key, error]) => (
+                                <li className={'text-left'} key={key}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
 
                 {/* Section I: Personal Info */}
                 <section>
@@ -146,8 +133,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-8">
                             <InputGroup
                                 label="اسم ولقب المترشح"
-                                name="fullName"
-                                value={data.fullName}
+                                name="name"
+                                value={data.full_name}
                                 onChange={handleChange}
                                 required
                                 placeholder="الاسم واللقب كما هو في بطاقة التعريف"
@@ -190,9 +177,9 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-6">
                             <InputGroup
                                 label="تاريخ الولادة"
-                                name="birthDate"
+                                name="birth_date"
                                 type="date"
-                                value={data.birthDate}
+                                value={data.birth_date}
                                 onChange={handleChange}
                                 required
                                 disabled={timeLeft.isExpired}
@@ -201,8 +188,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-6">
                             <SelectGroup
                                 label="مكان الولادة (الولاية)"
-                                name="birthPlace"
-                                value={data.birthPlace}
+                                name="birth_place"
+                                value={data.birth_place}
                                 onChange={handleChange}
                                 required
                                 options={TUNISIAN_GOVERNORATES.map(g => ({ value: g, label: g }))}
@@ -241,11 +228,11 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                 <div className="md:col-span-3">
                                     <InputGroup
                                         label="الترقيم البريدي"
-                                        name="postalCode"
+                                        name="postal_code"
                                         type="tel"
                                         pattern="[0-9]*"
                                         maxLength={4}
-                                        value={data.postalCode}
+                                        value={data.postal_code}
                                         onChange={handleChange}
                                         required
                                         placeholder="XXXX"
@@ -277,9 +264,9 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-6">
                             <InputGroup
                                 label="تاريخ الإصدار"
-                                name="cinDate"
+                                name="cin_date"
                                 type="date"
-                                value={data.cinDate}
+                                value={data.cin_date}
                                 onChange={handleChange}
                                 required
                                 disabled={timeLeft.isExpired}
@@ -291,12 +278,12 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                             <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
                                 <h3 className="text-sm font-bold text-gray-700 mb-3">التغطية الاجتماعية</h3>
                                 <div className="flex flex-wrap gap-4 mb-4">
-                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.socialSecurityType === 'cnss' ? 'bg-blue-50 border-blue-500 text-blue-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
+                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.social_security_type === 'cnss' ? 'bg-blue-50 border-blue-500 text-blue-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
                                         <input
                                             type="radio"
-                                            name="socialSecurityType"
+                                            name="social_security_type"
                                             value="cnss"
-                                            checked={data.socialSecurityType === 'cnss'}
+                                            checked={data.social_security_type === 'cnss'}
                                             onChange={handleSocialTypeChange}
                                             className="w-4 h-4 accent-blue-600"
                                             disabled={timeLeft.isExpired}
@@ -304,12 +291,12 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                         <span className="font-medium">CNSS</span>
                                     </label>
 
-                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.socialSecurityType === 'cnrps' ? 'bg-blue-50 border-blue-500 text-blue-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
+                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.social_security_type === 'cnrps' ? 'bg-blue-50 border-blue-500 text-blue-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
                                         <input
                                             type="radio"
-                                            name="socialSecurityType"
+                                            name="social_security_type"
                                             value="cnrps"
-                                            checked={data.socialSecurityType === 'cnrps'}
+                                            checked={data.social_security_type === 'cnrps'}
                                             onChange={handleSocialTypeChange}
                                             className="w-4 h-4 accent-blue-600"
                                             disabled={timeLeft.isExpired}
@@ -317,12 +304,12 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                         <span className="font-medium">CNRPS</span>
                                     </label>
 
-                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.socialSecurityType === 'none' ? 'bg-gray-100 border-gray-400 text-gray-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
+                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.social_security_type === 'none' ? 'bg-gray-100 border-gray-400 text-gray-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
                                         <input
                                             type="radio"
-                                            name="socialSecurityType"
+                                            name="social_security_type"
                                             value="none"
-                                            checked={data.socialSecurityType === 'none'}
+                                            checked={data.social_security_type === 'none'}
                                             onChange={handleSocialTypeChange}
                                             className="w-4 h-4 accent-gray-600"
                                             disabled={timeLeft.isExpired}
@@ -331,13 +318,13 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                     </label>
                                 </div>
 
-                                {(data.socialSecurityType === 'cnss' || data.socialSecurityType === 'cnrps') && (
+                                {(data.social_security_type === 'cnss' || data.social_security_type === 'cnrps') && (
                                     <div className="animate-fadeIn">
                                         <InputGroup
-                                            label={`رقم الانخراط (${data.socialSecurityType.toUpperCase()})`}
-                                            name="cnssNumber"
+                                            label={`رقم الانخراط (${data.social_security_type.toUpperCase()})`}
+                                            name="cnss_number"
                                             type="text"
-                                            value={data.cnssNumber}
+                                            value={data.cnss_number}
                                             onChange={handleChange}
                                             required
                                             placeholder="رقم المعرف الوحيد"
@@ -353,11 +340,11 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-6">
                             <InputGroup
                                 label="رقم الهاتف الجوال"
-                                name="mobile"
+                                name="tel"
                                 type="tel"
                                 pattern="[0-9]*"
                                 maxLength={8}
-                                value={data.mobile}
+                                value={data.tel}
                                 onChange={handleChange}
                                 required
                                 placeholder="XXXXXXXX"
@@ -390,8 +377,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-6">
                             <SelectGroup
                                 label="الحالة المدنية"
-                                name="maritalStatus"
-                                value={data.maritalStatus}
+                                name="marital_status"
+                                value={data.marital_status}
                                 onChange={handleChange}
                                 disabled={timeLeft.isExpired}
                                 options={[
@@ -405,8 +392,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-6">
                             <SelectGroup
                                 label="الوضعية العسكرية"
-                                name="militaryStatus"
-                                value={data.militaryStatus}
+                                name="military_status"
+                                value={data.military_status}
                                 onChange={handleChange}
                                 disabled={timeLeft.isExpired}
                                 options={[
@@ -418,13 +405,13 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                             />
                         </div>
 
-                        {data.maritalStatus === 'married' && (
+                        {data.marital_status === 'married' && (
                             <>
                                 <div className="md:col-span-6">
                                     <InputGroup
                                         label="اسم ولقب القرين"
-                                        name="spouseName"
-                                        value={data.spouseName}
+                                        name="spouse_name"
+                                        value={data.spouse_name}
                                         onChange={handleChange}
                                         disabled={timeLeft.isExpired}
                                     />
@@ -432,8 +419,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                 <div className="md:col-span-6">
                                     <InputGroup
                                         label="مهنة القرين"
-                                        name="spouseProfession"
-                                        value={data.spouseProfession}
+                                        name="spouse_profession"
+                                        value={data.spouse_profession}
                                         onChange={handleChange}
                                         disabled={timeLeft.isExpired}
                                     />
@@ -441,8 +428,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                 <div className="md:col-span-12">
                                     <InputGroup
                                         label="مكان عمله"
-                                        name="spouseWorkplace"
-                                        value={data.spouseWorkplace}
+                                        name="spouse_workplace"
+                                        value={data.spouse_workplace}
                                         onChange={handleChange}
                                         disabled={timeLeft.isExpired}
                                     />
@@ -450,10 +437,10 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                 <div className="md:col-span-6">
                                     <InputGroup
                                         label="عدد الأبناء"
-                                        name="childrenCount"
+                                        name="children_count"
                                         type="number"
                                         min={0}
-                                        value={data.childrenCount}
+                                        value={data.children_count}
                                         onChange={handleChange}
                                         disabled={timeLeft.isExpired}
                                     />
@@ -475,8 +462,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                             <div className="md:col-span-4">
                                 <SelectGroup
                                     label="شعبة البكالوريا"
-                                    name="bacSpecialty"
-                                    value={data.bacSpecialty}
+                                    name="bac_specialty"
+                                    value={data.bac_specialty}
                                     onChange={handleChange}
                                     required
                                     options={BAC_SPECIALTIES}
@@ -486,11 +473,11 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                             <div className="md:col-span-4">
                                 <InputGroup
                                     label="سنة الحصول عليها"
-                                    name="bacYear"
+                                    name="bac_year"
                                     type="number"
                                     min={1970}
                                     max={new Date().getFullYear()}
-                                    value={data.bacYear}
+                                    value={data.bac_year}
                                     onChange={handleChange}
                                     required
                                     disabled={timeLeft.isExpired}
@@ -499,12 +486,12 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                             <div className="md:col-span-4">
                                 <InputGroup
                                     label="معدل البكالوريا"
-                                    name="bacAverage"
+                                    name="bac_average"
                                     type="number"
                                     step="0.01"
                                     min={0}
                                     max={20}
-                                    value={data.bacAverage}
+                                    value={data.bac_average}
                                     onChange={handleChange}
                                     className="font-mono"
                                     placeholder="--.--"
@@ -549,11 +536,11 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-4">
                             <InputGroup
                                 label="سنة التخرج"
-                                name="graduationYear"
+                                name="graduation_year"
                                 type="number"
                                 min={1980}
                                 max={new Date().getFullYear()}
-                                value={data.graduationYear}
+                                value={data.graduation_year}
                                 onChange={handleChange}
                                 required
                                 disabled={timeLeft.isExpired}
@@ -563,8 +550,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-8">
                             <InputGroup
                                 label="قرار المعادلة رقم (إن وجد)"
-                                name="equivalenceDecision"
-                                value={data.equivalenceDecision}
+                                name="equivalence_decision"
+                                value={data.equivalence_decision}
                                 onChange={handleChange}
                                 helperText="لخريجي الجامعات الأجنبية أو الخاصة"
                                 disabled={timeLeft.isExpired}
@@ -573,9 +560,9 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-4">
                             <InputGroup
                                 label="بتاريخ"
-                                name="equivalenceDate"
+                                name="equivalence_date"
                                 type="date"
-                                value={data.equivalenceDate}
+                                value={data.equivalence_date}
                                 onChange={handleChange}
                                 disabled={timeLeft.isExpired}
                             />
@@ -584,12 +571,12 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                         <div className="md:col-span-12">
                             <InputGroup
                                 label="معدل أعداد سنة التخرج"
-                                name="gradAverage"
+                                name="grad_average"
                                 type="number"
                                 step="0.01"
                                 min={0}
                                 max={20}
-                                value={data.gradAverage}
+                                value={data.grad_average}
                                 onChange={handleChange}
                                 className="font-mono w-full md:w-1/3"
                                 placeholder="--.--"
@@ -607,8 +594,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                     <div className="w-full md:w-1/3">
                                         <input
                                             type="text"
-                                            name="targetPositionNumber"
-                                            value={data.targetPositionNumber}
+                                            name="position"
+                                            value={data.position}
                                             onChange={handleChange}
                                             className={`
                           w-full p-3 border rounded-lg text-center text-xl font-bold font-mono outline-none
@@ -634,18 +621,14 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                     </p>
                     <button
                         type="submit"
-                        disabled={isSubmitting || timeLeft.isExpired }
+                        disabled={ timeLeft.isExpired }
                         className={`
-              flex items-center gap-2 px-8 py-3 rounded-lg font-bold text-white shadow-lg
+              flex items-center gap-2 px-8 py-3 rounded-lg cursor-pointer font-bold text-white shadow-lg
               transition-all duration-200 transform hover:-translate-y-1
-              ${(isSubmitting || timeLeft.isExpired ) ? 'bg-gray-400 cursor-not-allowed hover:transform-none' : 'bg-primary-600 hover:bg-primary-700'}
+              ${( timeLeft.isExpired ) ? 'bg-gray-400 cursor-not-allowed hover:transform-none' : 'bg-primary-600 hover:bg-primary-700'}
             `}
                     >
-                        {isSubmitting ? (
-                            'جاري الإرسال...'
-                        ) : timeLeft.isExpired ? (
-                            'التسجيل مغلق'
-                        ) : (
+                        { timeLeft.isExpired ? ('التسجيل مغلق') : (
                             <>
                                 <span>تأكيد الترشح</span>
                                 <Send size={18} className="rtl:rotate-180" />
