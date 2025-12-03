@@ -24,7 +24,7 @@ Route::post('/apply', function (ApplicationRequest $request) use($contest) {
     \App\Models\Application::create($validated);
     $password = \Illuminate\Support\Str::password(8);
     \App\Models\User::create(['email' => $validated['email'], 'password' => $password, 'name'=> $validated['name'] ]);
-    return Redirect::to("/success")->with(['email' => $validated['email'], 'password' => $password]);
+    return Redirect::to("/success")->with(['data' => $validated]);
 
 });
 require __DIR__.'/settings.php';

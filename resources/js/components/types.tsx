@@ -1,7 +1,7 @@
 export interface CandidateData {
     tel: string;
     position: string | readonly string[] | number | undefined;
-    full_name: string;
+    name: string;
     gender: 'male' | 'female' | '';
     birth_date: string;
     birth_place: string;

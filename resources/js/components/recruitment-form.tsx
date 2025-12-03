@@ -114,10 +114,10 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
             <div className="p-6 md:p-10 space-y-12">
 
                 {Object.keys(errors).length > 0 && (
-                    <div className="mb-4 text-left rounded-lg border border-red-300 bg-red-50 p-4 text-red-800">
-                        <ul className="list-disc text-left list-inside space-y-1">
+                    <div className="mb-4 rounded-lg border border-red-300 bg-red-50 p-4 text-red-800">
+                        <ul className="list-disc list-inside space-y-1">
                             {Object.entries(errors).map(([key, error]) => (
-                                <li className={'text-left'} key={key}>{error}</li>
+                                <li  key={key}>{error}</li>
                             ))}
                         </ul>
                     </div>

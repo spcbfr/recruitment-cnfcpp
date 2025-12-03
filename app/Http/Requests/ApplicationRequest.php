@@ -58,4 +58,117 @@ class ApplicationRequest extends FormRequest
             'grad_average' => 'required|numeric',
         ];
     }
+    public function messages()
+    {
+        return [
+            'position.required' => 'حقل الخطة الوظيفية إلزامي.',
+            'position.numeric' => 'قيمة الخطة الوظيفية يجب أن تكون رقمًا.',
+            'position.exists' => 'الخطة الوظيفية المختارة غير موجودة.',
+
+            'name.required' => 'حقل الاسم إلزامي.',
+            'name.string' => 'الاسم يجب أن يكون نصاً.',
+            'name.max' => 'الاسم يجب ألا يتجاوز 255 حرفاً.',
+
+            'gender.required' => 'حقل الجنس إلزامي.',
+            'gender.string' => 'الجنس يجب أن يكون نصاً.',
+            'gender.max' => 'الجنس يجب ألا يتجاوز 10 أحرف.',
+
+            'birth_date.required' => 'حقل تاريخ الولادة إلزامي.',
+            'birth_date.date' => 'تاريخ الولادة غير صالح.',
+
+            'birth_place.required' => 'حقل مكان الولادة إلزامي.',
+            'birth_place.string' => 'مكان الولادة يجب أن يكون نصاً.',
+            'birth_place.max' => 'مكان الولادة يجب ألا يتجاوز 255 حرفاً.',
+
+            'address.required' => 'حقل العنوان إلزامي.',
+            'address.string' => 'العنوان يجب أن يكون نصاً.',
+            'address.max' => 'العنوان يجب ألا يتجاوز 500 حرفاً.',
+
+            'governorate.required' => 'حقل الولاية إلزامي.',
+            'governorate.string' => 'الولاية يجب أن تكون نصاً.',
+            'governorate.max' => 'الولاية يجب ألا تتجاوز 255 حرفاً.',
+
+            'postal_code.required' => 'حقل الرمز البريدي إلزامي.',
+            'postal_code.integer' => 'الرمز البريدي يجب أن يكون رقماً.',
+            'postal_code.digits' => 'الرمز البريدي يجب أن يحتوي على 4 أرقام.',
+
+            'cin.required' => 'حقل رقم بطاقة التعريف الوطنية إلزامي.',
+            'cin.integer' => 'رقم بطاقة التعريف يجب أن يكون رقماً.',
+            'cin.digits' => 'رقم بطاقة التعريف يجب أن يحتوي على 8 أرقام.',
+
+            'cin_date.required' => 'حقل تاريخ إصدار بطاقة التعريف إلزامي.',
+            'cin_date.date' => 'تاريخ إصدار بطاقة التعريف غير صالح.',
+
+            'social_security_type.required' => 'نوع التغطية الاجتماعية إلزامي.',
+            'social_security_type.in' => 'نوع التغطية الاجتماعية يجب أن يكون cnss أو cnrps أو none.',
+
+            'cnss_number.required' => 'رقم التغطية الاجتماعية إلزامي عند اختيار CNSS أو CNRPS.',
+
+            'tel.required' => 'رقم الهاتف إلزامي.',
+            'tel.string' => 'رقم الهاتف يجب أن يكون نصاً.',
+            'tel.max' => 'رقم الهاتف يجب ألا يتجاوز 8 أرقام.',
+
+            'email.required' => 'البريد الإلكتروني إلزامي.',
+            'email.email' => 'صيغة البريد الإلكتروني غير صالحة.',
+            'email.max' => 'البريد الإلكتروني يجب ألا يتجاوز 255 حرفاً.',
+
+            'marital_status.required' => 'الحالة الاجتماعية إلزامية.',
+            'marital_status.string' => 'الحالة الاجتماعية يجب أن تكون نصاً.',
+            'marital_status.max' => 'الحالة الاجتماعية يجب ألا تتجاوز 50 حرفاً.',
+
+            'military_status.required' => 'الوضعية العسكرية إلزامية.',
+            'military_status.string' => 'الوضعية العسكرية يجب أن تكون نصاً.',
+            'military_status.max' => 'الوضعية العسكرية يجب ألا تتجاوز 50 حرفاً.',
+
+            'spouse_name.required_if' => 'اسم الزوج(ة) إلزامي في حالة الزواج.',
+            'spouse_name.string' => 'اسم الزوج(ة) يجب أن يكون نصاً.',
+            'spouse_name.max' => 'اسم الزوج(ة) يجب ألا يتجاوز 255 حرفاً.',
+
+            'spouse_profession.required_if' => 'مهنة الزوج(ة) إلزامية في حالة الزواج.',
+            'spouse_profession.string' => 'مهنة الزوج(ة) يجب أن تكون نصاً.',
+            'spouse_profession.max' => 'مهنة الزوج(ة) يجب ألا تتجاوز 255 حرفاً.',
+
+            'spouse_workplace.required_if' => 'مكان عمل الزوج(ة) إلزامي في حالة الزواج.',
+            'spouse_workplace.string' => 'مكان عمل الزوج(ة) يجب أن يكون نصاً.',
+            'spouse_workplace.max' => 'مكان عمل الزوج(ة) يجب ألا يتجاوز 255 حرفاً.',
+
+            'children_count.required_if' => 'عدد الأطفال إلزامي في حالة الزواج.',
+            'children_count.integer' => 'عدد الأطفال يجب أن يكون رقماً.',
+
+            'degree.string' => 'الشهـادة يجب أن تكون نصاً.',
+            'degree.max' => 'الشهـادة يجب ألا تتجاوز 255 حرفاً.',
+
+            'specialty.required' => 'الاختصاص إلزامي.',
+            'specialty.string' => 'الاختصاص يجب أن يكون نصاً.',
+            'specialty.max' => 'الاختصاص يجب ألا يتجاوز 255 حرفاً.',
+
+            'graduation_year.required' => 'سنة التخرج إلزامية.',
+            'graduation_year.integer' => 'سنة التخرج يجب أن تكون رقماً.',
+            'graduation_year.min' => 'سنة التخرج لا يمكن أن تكون أقل من 1900.',
+            'graduation_year.max' => 'سنة التخرج لا يمكن أن تتجاوز 2100.',
+
+            'equivalence_decision.required' => 'قرار المعادلة إلزامي.',
+            'equivalence_decision.string' => 'قرار المعادلة يجب أن يكون نصاً.',
+            'equivalence_decision.max' => 'قرار المعادلة يجب ألا يتجاوز 255 حرفاً.',
+
+            'equivalence_date.required' => 'تاريخ المعادلة إلزامي.',
+            'equivalence_date.date' => 'تاريخ المعادلة غير صالح.',
+
+            'bac_average.required' => 'معدل البكالوريا إلزامي.',
+            'bac_average.numeric' => 'معدل البكالوريا يجب أن يكون رقماً.',
+
+            'bac_specialty.required' => 'شعبة البكالوريا إلزامية.',
+            'bac_specialty.string' => 'شعبة البكالوريا يجب أن تكون نصاً.',
+            'bac_specialty.max' => 'شعبة البكالوريا يجب ألا تتجاوز 255 حرفاً.',
+
+            'bac_year.required' => 'سنة البكالوريا إلزامية.',
+            'bac_year.integer' => 'سنة البكالوريا يجب أن تكون رقماً.',
+            'bac_year.min' => 'سنة البكالوريا لا يمكن أن تكون أقل من 1900.',
+            'bac_year.max' => 'سنة البكالوريا لا يمكن أن تتجاوز 2100.',
+
+            'grad_average.required' => 'معدل التخرج إلزامي.',
+            'grad_average.numeric' => 'معدل التخرج يجب أن يكون رقماً.',
+        ];
+    }
+
 }

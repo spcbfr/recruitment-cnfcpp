@@ -1,6 +1,4 @@
-import { dashboard, login } from '@/routes';
-import { type SharedData } from '@/types';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { RecruitmentForm } from '@/components/recruitment-form';
 
 export default function Welcome({
