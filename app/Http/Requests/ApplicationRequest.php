@@ -32,7 +32,7 @@ class ApplicationRequest extends FormRequest
             'address' => 'required|string|max:500',
             'governorate' => 'required|string|max:255',
             'postal_code' => 'required|integer|digits:4',
-            'cin' => 'required|integer|digits:8',
+            'cin' => 'required|integer|digits:8|unique:applications,cin',
             'cin_date' => 'required|date',
             'social_security_type' => 'required|string|in:cnss,cnrps,none',
             'cnss_number' => Rule::requiredIf(fn () => in_array($this->input('social_security_type'), ['cnss', 'cnrps'])),
@@ -49,13 +49,14 @@ class ApplicationRequest extends FormRequest
             'degree' => 'nullable|string|max:255',
             'specialty' => 'required|string|max:255',
             'graduation_year' => 'required|integer|min:1900|max:2100',
-            'equivalence_decision' => 'required|string|max:255',
-            'equivalence_date' => 'required|date',
+            'equivalence_decision' => 'nullable:string|max:255',
+            'equivalence_date' => 'required_with:equivalence_decision|nullable|date',
 
-            'bac_average' => 'required|numeric',
+
+            'bac_average' => 'required|numeric|max:20|min:9',
             'bac_specialty' => 'required|string|max:255',
             'bac_year' => 'required|integer|min:1900|max:2100',
-            'grad_average' => 'required|numeric',
+            'grad_average' => 'required|numeric|max:20|min:9',
         ];
     }
     public function messages()
@@ -93,6 +94,7 @@ class ApplicationRequest extends FormRequest
             'postal_code.digits' => 'الرمز البريدي يجب أن يحتوي على 4 أرقام.',
 
             'cin.required' => 'حقل رقم بطاقة التعريف الوطنية إلزامي.',
+            'cin.unique' => 'تم استعمال رقم بطاقة التعريف من قبل',
             'cin.integer' => 'رقم بطاقة التعريف يجب أن يكون رقماً.',
             'cin.digits' => 'رقم بطاقة التعريف يجب أن يحتوي على 8 أرقام.',
 
@@ -107,6 +109,10 @@ class ApplicationRequest extends FormRequest
             'tel.required' => 'رقم الهاتف إلزامي.',
             'tel.string' => 'رقم الهاتف يجب أن يكون نصاً.',
             'tel.max' => 'رقم الهاتف يجب ألا يتجاوز 8 أرقام.',
+            'grad_average.max' => 'المعدل التخرج يجب الا يتجاوز 20',
+            'grad_average.min' => 'معدل التخرج يجب الا يقل عن 9',
+            'bac_average.min' => 'معدل الباكالوريا يجب الا يقل عن 9',
+            'bac_average.max' => 'معدل الباكالوريا يجب الا يتجاوز عن 20',
 
             'email.required' => 'البريد الإلكتروني إلزامي.',
             'email.email' => 'صيغة البريد الإلكتروني غير صالحة.',
@@ -147,11 +153,10 @@ class ApplicationRequest extends FormRequest
             'graduation_year.min' => 'سنة التخرج لا يمكن أن تكون أقل من 1900.',
             'graduation_year.max' => 'سنة التخرج لا يمكن أن تتجاوز 2100.',
 
-            'equivalence_decision.required' => 'قرار المعادلة إلزامي.',
             'equivalence_decision.string' => 'قرار المعادلة يجب أن يكون نصاً.',
             'equivalence_decision.max' => 'قرار المعادلة يجب ألا يتجاوز 255 حرفاً.',
 
-            'equivalence_date.required' => 'تاريخ المعادلة إلزامي.',
+            'equivalence_date.required_with' => 'تاريخ المعادلة إلزامي.',
             'equivalence_date.date' => 'تاريخ المعادلة غير صالح.',
 
             'bac_average.required' => 'معدل البكالوريا إلزامي.',

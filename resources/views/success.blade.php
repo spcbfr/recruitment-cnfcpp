@@ -9,18 +9,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تم استلام طلبكم بنجاح</title>
 
-    <!-- Tailwind CDN (remove if you are using Vite build) -->
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* 🖨️ إعدادات الطباعة */
+        @media print {
+
+            /* إخفاء زر الطباعة والعودة */
+            .no-print {
+                display: none !important;
+            }
+
+            /* تصغير حجم النص قليلاً لتلاؤم المحتوى */
+            body {
+                font-size: 12px !important;
+                background: white !important;
+            }
+
+            /* تقليل الهوامش */
+            @page {
+                margin: 10mm;
+            }
+
+            /* تقليل المسافات */
+            h2, h3 {
+                margin-top: 5px !important;
+                margin-bottom: 5px !important;
+            }
+
+            table th, table td {
+                padding: 4px 6px !important;
+            }
+            .goog {
+                display: none;
+            }
+        }
     </style>
+
 </head>
 <body class="bg-gray-100">
 
 <div class="max-w-5xl mx-auto px-4 py-10">
 
-    <div class="text-center mb-10">
+    <!-- زر الطباعة -->
+    <div class="text-center mb-6 no-print">
+        <button onclick="window.print()"
+                class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition font-semibold">
+            🖨️ طباعة
+        </button>
+    </div>
+
+    <div class="text-center goog mb-10">
         <h2 class="text-3xl font-bold text-gray-800">تم إرسال طلبكم بنجاح</h2>
         <p class="text-gray-500 mt-2">فيما يلي المعطيات التي قمتم بإدخالها:</p>
     </div>
@@ -118,7 +162,7 @@
 
     </div>
 
-    <div class="text-center mt-8">
+    <div class="text-center mt-8 no-print">
         <a href="{{ url('/') }}"
            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
             العودة إلى الصفحة الرئيسية
