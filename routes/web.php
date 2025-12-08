@@ -5,8 +5,8 @@ use App\Mail\ApplicationSuccessMail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-$contest = \App\Models\Contest::query()->where('ends_at', '>', now())->first();
-Route::get('/', function () use ($contest) {
+Route::get('/', function ()  {
+    $contest = \App\Models\Contest::query()->where('ends_at', '>', now())->first();
     $deadline = $contest->ends_at->toIso8601String();
 
     return Inertia::render('welcome', [
@@ -17,8 +17,9 @@ Route::get('/', function () use ($contest) {
 
 Route::view('/success', 'success');
 
-Route::post('/apply', function (ApplicationRequest $request) use ($contest) {
+Route::post('/apply', function (ApplicationRequest $request) {
 
+    $contest = \App\Models\Contest::query()->where('ends_at', '>', now())->first();
     $validated = $request->validated();
 
     $validated['contest_id'] = $contest->id;
