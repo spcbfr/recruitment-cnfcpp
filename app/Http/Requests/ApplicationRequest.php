@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ApplicationRequest extends FormRequest
 {
@@ -28,23 +27,13 @@ class ApplicationRequest extends FormRequest
             'name' => 'required|string|max:255',
             'gender' => 'required|string|max:10',
             'birth_date' => 'required|date',
-            'birth_place' => 'required|string|max:255',
             'address' => 'required|string|max:500',
             'governorate' => 'required|string|max:255',
             'postal_code' => 'required|integer|digits:4',
             'cin' => 'required|integer|digits:8|unique:applications,cin',
             'cin_date' => 'required|date',
-            'social_security_type' => 'required|string|in:cnss,cnrps,none',
-            'cnss_number' => Rule::requiredIf(fn () => in_array($this->input('social_security_type'), ['cnss', 'cnrps'])),
             'tel' => 'required|string|max:8',
             'email' => 'required|email|max:255',
-            'marital_status' => 'required|string|max:50',
-            'military_status' => 'required|string|max:50',
-
-            'spouse_name' => 'required_if:marital_status,married,|string|max:255',
-            'spouse_profession' => 'required_if:marital_status,married|string|max:255',
-            'spouse_workplace' => 'required_if:marital_status,married|string|max:255',
-            'children_count' => 'required_if:marital_status,married|integer',
 
             'degree' => 'nullable|string|max:255',
             'specialty' => 'required|string|max:255',
@@ -52,13 +41,13 @@ class ApplicationRequest extends FormRequest
             'equivalence_decision' => 'nullable:string|max:255',
             'equivalence_date' => 'required_with:equivalence_decision|nullable|date',
 
-
             'bac_average' => 'required|numeric|max:20|min:9',
             'bac_specialty' => 'required|string|max:255',
             'bac_year' => 'required|integer|min:1900|max:2100',
             'grad_average' => 'required|numeric|max:20|min:9',
         ];
     }
+
     public function messages()
     {
         return [
@@ -101,11 +90,6 @@ class ApplicationRequest extends FormRequest
             'cin_date.required' => 'حقل تاريخ إصدار بطاقة التعريف إلزامي.',
             'cin_date.date' => 'تاريخ إصدار بطاقة التعريف غير صالح.',
 
-            'social_security_type.required' => 'نوع التغطية الاجتماعية إلزامي.',
-            'social_security_type.in' => 'نوع التغطية الاجتماعية يجب أن يكون cnss أو cnrps أو none.',
-
-            'cnss_number.required' => 'رقم التغطية الاجتماعية إلزامي عند اختيار CNSS أو CNRPS.',
-
             'tel.required' => 'رقم الهاتف إلزامي.',
             'tel.string' => 'رقم الهاتف يجب أن يكون نصاً.',
             'tel.max' => 'رقم الهاتف يجب ألا يتجاوز 8 أرقام.',
@@ -117,29 +101,6 @@ class ApplicationRequest extends FormRequest
             'email.required' => 'البريد الإلكتروني إلزامي.',
             'email.email' => 'صيغة البريد الإلكتروني غير صالحة.',
             'email.max' => 'البريد الإلكتروني يجب ألا يتجاوز 255 حرفاً.',
-
-            'marital_status.required' => 'الحالة الاجتماعية إلزامية.',
-            'marital_status.string' => 'الحالة الاجتماعية يجب أن تكون نصاً.',
-            'marital_status.max' => 'الحالة الاجتماعية يجب ألا تتجاوز 50 حرفاً.',
-
-            'military_status.required' => 'الوضعية العسكرية إلزامية.',
-            'military_status.string' => 'الوضعية العسكرية يجب أن تكون نصاً.',
-            'military_status.max' => 'الوضعية العسكرية يجب ألا تتجاوز 50 حرفاً.',
-
-            'spouse_name.required_if' => 'اسم الزوج(ة) إلزامي في حالة الزواج.',
-            'spouse_name.string' => 'اسم الزوج(ة) يجب أن يكون نصاً.',
-            'spouse_name.max' => 'اسم الزوج(ة) يجب ألا يتجاوز 255 حرفاً.',
-
-            'spouse_profession.required_if' => 'مهنة الزوج(ة) إلزامية في حالة الزواج.',
-            'spouse_profession.string' => 'مهنة الزوج(ة) يجب أن تكون نصاً.',
-            'spouse_profession.max' => 'مهنة الزوج(ة) يجب ألا تتجاوز 255 حرفاً.',
-
-            'spouse_workplace.required_if' => 'مكان عمل الزوج(ة) إلزامي في حالة الزواج.',
-            'spouse_workplace.string' => 'مكان عمل الزوج(ة) يجب أن يكون نصاً.',
-            'spouse_workplace.max' => 'مكان عمل الزوج(ة) يجب ألا يتجاوز 255 حرفاً.',
-
-            'children_count.required_if' => 'عدد الأطفال إلزامي في حالة الزواج.',
-            'children_count.integer' => 'عدد الأطفال يجب أن يكون رقماً.',
 
             'degree.string' => 'الشهـادة يجب أن تكون نصاً.',
             'degree.max' => 'الشهـادة يجب ألا تتجاوز 255 حرفاً.',
@@ -175,5 +136,4 @@ class ApplicationRequest extends FormRequest
             'grad_average.numeric' => 'معدل التخرج يجب أن يكون رقماً.',
         ];
     }
-
 }

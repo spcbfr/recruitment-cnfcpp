@@ -85,17 +85,13 @@
                         'الاسم الكامل' => $data['name'],
                         'الجنس' => $data['gender'],
                         'تاريخ الولادة' => $data['birth_date'],
-                        'مكان الولادة' => $data['birth_place'],
                         'العنوان' => $data['address'],
                         'الولاية' => $data['governorate'],
                         'الرمز البريدي' => $data['postal_code'],
                         'رقم بطاقة التعريف' => $data['cin'],
                         'تاريخ إصدار بطاقة التعريف' => $data['cin_date'],
-                        'نوع التغطية الاجتماعية' => $data['social_security_type'],
                         'الهاتف' => $data['tel'],
                         'البريد الإلكتروني' => $data['email'],
-                        'الحالة المدنية' => $data['marital_status'],
-                        'الوضعية العسكرية' => $data['military_status'],
                     ];
                 @endphp
 
@@ -106,19 +102,6 @@
                     </tr>
                 @endforeach
 
-                @if(in_array($data['social_security_type'], ['cnss','cnrps']))
-                    <tr>
-                        <th class="py-3 px-4 bg-gray-100">رقم الانخراط</th>
-                        <td class="py-3 px-4">{{ $data['cnss_number'] }}</td>
-                    </tr>
-                @endif
-
-                @if($data['marital_status'] === 'married')
-                    <tr><th class="py-3 px-4 bg-gray-100">اسم الزوج/الزوجة</th><td class="py-3 px-4">{{ $data['spouse_name'] }}</td></tr>
-                    <tr><th class="py-3 px-4 bg-gray-100">مهنة الزوج/الزوجة</th><td class="py-3 px-4">{{ $data['spouse_profession'] }}</td></tr>
-                    <tr><th class="py-3 px-4 bg-gray-100">مكان العمل</th><td class="py-3 px-4">{{ $data['spouse_workplace'] }}</td></tr>
-                    <tr><th class="py-3 px-4 bg-gray-100">عدد الأطفال</th><td class="py-3 px-4">{{ $data['children_count'] }}</td></tr>
-                @endif
 
                 </tbody>
             </table>

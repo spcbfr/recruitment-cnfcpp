@@ -24,8 +24,6 @@ class ApplicationForm
                     ->required(),
                 DatePicker::make('birth_date')
                     ->required(),
-                TextInput::make('birth_place')
-                    ->required(),
                 TextInput::make('address')
                     ->required(),
                 TextInput::make('governorate')
@@ -38,11 +36,6 @@ class ApplicationForm
                     ->numeric(),
                 DatePicker::make('cin_date')
                     ->required(),
-                TextInput::make('social_security_type')
-                    ->required(),
-                TextInput::make('cnss_number')
-                    ->required()
-                    ->numeric(),
                 TextInput::make('tel')
                     ->tel()
                     ->required(),
@@ -50,15 +43,6 @@ class ApplicationForm
                     ->label('Email address')
                     ->email()
                     ->required(),
-                TextInput::make('marital_status')
-                    ->required(),
-                TextInput::make('military_status')
-                    ->required(),
-                TextInput::make('spouse_name'),
-                TextInput::make('spouse_profession'),
-                TextInput::make('spouse_workplace'),
-                TextInput::make('children_count')
-                    ->numeric(),
                 TextInput::make('degree'),
                 TextInput::make('specialty')
                     ->required(),

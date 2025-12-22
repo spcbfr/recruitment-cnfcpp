@@ -185,17 +185,6 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                                 disabled={timeLeft.isExpired}
                             />
                         </div>
-                        <div className="md:col-span-6">
-                            <SelectGroup
-                                label="مكان الولادة (الولاية)"
-                                name="birth_place"
-                                value={data.birth_place}
-                                onChange={handleChange}
-                                required
-                                options={TUNISIAN_GOVERNORATES.map(g => ({ value: g, label: g }))}
-                                disabled={timeLeft.isExpired}
-                            />
-                        </div>
 
                         {/* Row 3: Address */}
                         <div className="md:col-span-12">
@@ -273,68 +262,6 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                             />
                         </div>
 
-                        {/* Row 5: CNSS/CNRPS */}
-                        <div className="md:col-span-12">
-                            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h3 className="text-sm font-bold text-gray-700 mb-3">التغطية الاجتماعية</h3>
-                                <div className="flex flex-wrap gap-4 mb-4">
-                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.social_security_type === 'cnss' ? 'bg-blue-50 border-blue-500 text-blue-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
-                                        <input
-                                            type="radio"
-                                            name="social_security_type"
-                                            value="cnss"
-                                            checked={data.social_security_type === 'cnss'}
-                                            onChange={handleSocialTypeChange}
-                                            className="w-4 h-4 accent-blue-600"
-                                            disabled={timeLeft.isExpired}
-                                        />
-                                        <span className="font-medium">CNSS</span>
-                                    </label>
-
-                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.social_security_type === 'cnrps' ? 'bg-blue-50 border-blue-500 text-blue-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
-                                        <input
-                                            type="radio"
-                                            name="social_security_type"
-                                            value="cnrps"
-                                            checked={data.social_security_type === 'cnrps'}
-                                            onChange={handleSocialTypeChange}
-                                            className="w-4 h-4 accent-blue-600"
-                                            disabled={timeLeft.isExpired}
-                                        />
-                                        <span className="font-medium">CNRPS</span>
-                                    </label>
-
-                                    <label className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${data.social_security_type === 'none' ? 'bg-gray-100 border-gray-400 text-gray-700' : 'bg-white border-gray-300 hover:bg-gray-50'}`}>
-                                        <input
-                                            type="radio"
-                                            name="social_security_type"
-                                            value="none"
-                                            checked={data.social_security_type === 'none'}
-                                            onChange={handleSocialTypeChange}
-                                            className="w-4 h-4 accent-gray-600"
-                                            disabled={timeLeft.isExpired}
-                                        />
-                                        <span className="font-medium">لا ينطبق (Néant)</span>
-                                    </label>
-                                </div>
-
-                                {(data.social_security_type === 'cnss' || data.social_security_type === 'cnrps') && (
-                                    <div className="animate-fadeIn">
-                                        <InputGroup
-                                            label={`رقم الانخراط (${data.social_security_type.toUpperCase()})`}
-                                            name="cnss_number"
-                                            type="text"
-                                            value={data.cnss_number}
-                                            onChange={handleChange}
-                                            required
-                                            placeholder="رقم المعرف الوحيد"
-                                            className=" tracking-wide bg-white"
-                                            disabled={timeLeft.isExpired}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        </div>
 
                         {/* Row 6: Contact */}
                         <div className="md:col-span-6">
@@ -370,85 +297,6 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                     </div>
                 </section>
 
-                {/* Section II: Civil Status */}
-                <section>
-                    <SectionHeader number="II" title="الحالة الاجتماعية" />
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 bg-gray-50 p-6 rounded-xl border border-gray-200">
-                        <div className="md:col-span-6">
-                            <SelectGroup
-                                label="الحالة المدنية"
-                                name="marital_status"
-                                value={data.marital_status}
-                                onChange={handleChange}
-                                disabled={timeLeft.isExpired}
-                                options={[
-                                    { value: 'single', label: 'أعزب / عزباء' },
-                                    { value: 'married', label: 'متزوج(ة)' },
-                                    { value: 'divorced', label: 'مطلق(ة)' },
-                                    { value: 'widowed', label: 'أرمل(ة)' },
-                                ]}
-                            />
-                        </div>
-                        <div className="md:col-span-6">
-                            <SelectGroup
-                                label="الوضعية العسكرية"
-                                name="military_status"
-                                value={data.military_status}
-                                onChange={handleChange}
-                                disabled={timeLeft.isExpired}
-                                options={[
-                                    { value: 'completed', label: 'أدى الخدمة' },
-                                    { value: 'exempt', label: 'معفى' },
-                                    { value: 'postponed', label: 'مؤجل' },
-                                    { value: 'not_concerned', label: 'غير معني' },
-                                ]}
-                            />
-                        </div>
-
-                        {data.marital_status === 'married' && (
-                            <>
-                                <div className="md:col-span-6">
-                                    <InputGroup
-                                        label="اسم ولقب القرين"
-                                        name="spouse_name"
-                                        value={data.spouse_name}
-                                        onChange={handleChange}
-                                        disabled={timeLeft.isExpired}
-                                    />
-                                </div>
-                                <div className="md:col-span-6">
-                                    <InputGroup
-                                        label="مهنة القرين"
-                                        name="spouse_profession"
-                                        value={data.spouse_profession}
-                                        onChange={handleChange}
-                                        disabled={timeLeft.isExpired}
-                                    />
-                                </div>
-                                <div className="md:col-span-12">
-                                    <InputGroup
-                                        label="مكان عمله"
-                                        name="spouse_workplace"
-                                        value={data.spouse_workplace}
-                                        onChange={handleChange}
-                                        disabled={timeLeft.isExpired}
-                                    />
-                                </div>
-                                <div className="md:col-span-6">
-                                    <InputGroup
-                                        label="عدد الأبناء"
-                                        name="children_count"
-                                        type="number"
-                                        min={0}
-                                        value={data.children_count}
-                                        onChange={handleChange}
-                                        disabled={timeLeft.isExpired}
-                                    />
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </section>
 
                 {/* Section III: Education */}
                 <section>
