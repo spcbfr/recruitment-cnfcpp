@@ -13,16 +13,23 @@ class ContestForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('الاسم')
                     ->required(),
+
                 TextInput::make('bac_factor')
+                    ->label('ضارب البكالوريا')
                     ->maxValue(100)
                     ->minValue(0)
                     ->required(),
+
                 TextInput::make('grad_factor')
+                    ->label('ضارب التخرج')
                     ->maxValue(100)
                     ->minValue(0)
                     ->required(),
+
                 DateTimePicker::make('ends_at')
+                    ->label('تاريخ ووقت غلق المسابقة')
                     ->required(),
             ]);
     }

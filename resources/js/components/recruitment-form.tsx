@@ -147,8 +147,8 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                     <input
                                         type="radio"
                                         name="gender"
-                                        value="male"
-                                        checked={data.gender === 'male'}
+                                        value="ذكر"
+                                        checked={data.gender === 'ذكر'}
                                         onChange={handleChange}
                                         className="w-4 h-4 accent-primary-600"
                                         disabled={timeLeft.isExpired}
@@ -159,8 +159,8 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                     <input
                                         type="radio"
                                         name="gender"
-                                        value="female"
-                                        checked={data.gender === 'female'}
+                                        value="انثى"
+                                        checked={data.gender === 'انثى'}
                                         onChange={handleChange}
                                         className="w-4 h-4 accent-pink-500"
                                         disabled={timeLeft.isExpired}

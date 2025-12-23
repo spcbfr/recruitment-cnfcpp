@@ -2,7 +2,7 @@ export interface CandidateData {
     tel: string;
     position: string | readonly string[] | number | undefined;
     name: string;
-    gender: 'male' | 'female' | '';
+    gender: 'ذكر' | 'انثى' | '';
     birth_date: string;
     birth_place: string;
     address: string;

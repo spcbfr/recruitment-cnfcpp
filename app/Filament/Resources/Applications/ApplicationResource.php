@@ -17,6 +17,8 @@ use Filament\Tables\Table;
 class ApplicationResource extends Resource
 {
     protected static ?string $model = Application::class;
+    protected static ?string $modelLabel = "مطلب";
+    protected static ?string $pluralModelLabel = "مطالب";
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
