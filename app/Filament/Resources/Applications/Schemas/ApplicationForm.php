@@ -39,6 +39,7 @@ class ApplicationForm
                 TextInput::make('tel')
                     ->tel()
                     ->required(),
+                TextInput::make('status'),
                 TextInput::make('email')
                     ->label('Email address')
                     ->email()

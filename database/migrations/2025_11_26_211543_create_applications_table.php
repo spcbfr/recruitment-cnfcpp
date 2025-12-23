@@ -18,11 +18,13 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('address');
             $table->string('governorate');
-            $table->unsignedSmallInteger('postal_code');
-            $table->integer('cin')->unique();
+            $table->string('postal_code');
+            $table->string('cin')->unique();
             $table->date('cin_date');
             $table->string('tel');
+            $table->integer('test_grade')->nullable();
             $table->string('email');
+            $table->string("status")->default("nouveau");
             $table->string('degree')->nullable();
             $table->string('specialty');
             $table->year('graduation_year');

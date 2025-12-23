@@ -66,7 +66,9 @@
 
     <div class="text-center goog mb-10">
         <h2 class="text-3xl font-bold text-gray-800">تم إرسال طلبكم بنجاح</h2>
-        <p class="text-gray-500 mt-2">فيما يلي المعطيات التي قمتم بإدخالها:</p>
+        <p class="text-gray-500 mt-2">طباعة استمارة الترشح وامضائها لتضمينها
+            بالملف الورقي في صورة قبول المترشح في
+            الفرز الأولي.</p>
     </div>
 
     <!-- Card -->

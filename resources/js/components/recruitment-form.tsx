@@ -5,12 +5,12 @@ import { SectionHeader } from './SectionHeader';
 import {  Send,  Clock, AlertTriangle  } from 'lucide-react';
 import { Form, usePage } from '@inertiajs/react';
 
-export const RecruitmentForm: React.FC = (deadlineDate) => {
+export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
     const [data, setData] = useState<CandidateData>(INITIAL_DATA);
     const { errors } = usePage().props;
 
-
     // Countdown State
+    positions = deadlineDate.positions;
     const [deadline] = useState<Date>(() => {
         return new Date(deadlineDate.deadlineDate);
     });
@@ -52,21 +52,18 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
         setData((prev) => ({ ...prev, [name]: value }));
     }, []);
 
-    const handleSocialTypeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value as any;
-        setData(prev => ({
-            ...prev,
-            social_security_type: value,
-            cnss_number: value === 'none' ? '' : prev.cnss_number
-        }));
-    }, []);
 
     return (
+
         <Form  action="/apply" method="POST" className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             {/* Header */}
             <div className="bg-gradient-to-l from-primary-800 to-primary-600 p-8 text-white text-center">
-                <h1 className="text-3xl font-extrabold mb-2">استمارة الترشح</h1>
-                <p className="opacity-90">يرجى ملء جميع البيانات بدقة وعناية</p>
+                <h1 className="text-3xl font-extrabold mb-2">استمارة ترشح للمشاركة في مناظرة الخارجية لانتداب إطارات بعنوان سنة 2025</h1>
+                <p className="opacity-90">الرجاء تعمير البيانات المطلوبة بكلّ دقة باللغة
+
+                    العربية ثم المصادقة عليها.
+                    ولا يمكن تعديلها بعد المصادقة.
+                    وطباعتها وإرفاقها بملف الترشح.</p>
             </div>
 
             {/* Deadline Countdown Banner */}
@@ -437,25 +434,31 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                             <div className={`
                  p-6 rounded-xl border transition-colors duration-300
                `}>
-                                <label className="block text-sm font-bold text-gray-700 mb-2">رقم الخطة المزمع المشاركة فيها <span className="text-red-500">*</span></label>
+                                <label className="block text-sm font-bold text-gray-700 mb-2">
+                                    رقم الخطة المزمع المشاركة فيها <span className="text-red-500">*</span>
+                                </label>
+
                                 <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
                                     <div className="w-full md:w-1/3">
-                                        <input
-                                            type="text"
+                                        <select
                                             name="position"
                                             value={data.position}
                                             onChange={handleChange}
-                                            className={`
-                          w-full p-3 border rounded-lg text-center text-xl font-bold font-mono outline-none
-                          bg-white
-                          focus:ring-2
-                        `}
-                                            placeholder="رقم الخطة"
                                             disabled={timeLeft.isExpired}
-                                            autoComplete="off"
-                                        />
-                                    </div>
+                                            className={`
+                w-full p-3 border rounded-lg text-center text-lg font-bold
+                bg-white outline-none focus:ring-2
+            `}
+                                        >
+                                            <option value="">اختر رقم الخطة</option>
 
+                                            {positions.map((position) => (
+                                                <option key={position} value={position}>
+                                                    {position}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -465,7 +468,8 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                 {/* Footer Actions */}
                 <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-gray-500">
-                        أشهد بصحة المعلومات المدلاة أعلاه وأتحمل المسؤولية القانونية في حالة ثبوت عكس ذلك.
+                        أشهد بصحة البيانات المذكورة أعلاه
+                        وأتحمل مسؤوليتي في حالة ثبوت عكس ذلك
                     </p>
                     <button
                         type="submit"
@@ -486,5 +490,6 @@ export const RecruitmentForm: React.FC = (deadlineDate) => {
                 </div>
             </div>
         </Form>
+
     );
 };

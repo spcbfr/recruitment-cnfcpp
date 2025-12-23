@@ -3,11 +3,13 @@ import { RecruitmentForm } from '@/components/recruitment-form';
 
 export default function Welcome({
     deadline,
-    currentlyRecruiting
+    currentlyRecruiting,
+    positions
 }: {
     deadline: string, currentlyRecruiting: boolean;
 }) {
 
+    console.log(positions);
     return (
         <>
             <Head title="Welcome">
@@ -25,7 +27,7 @@ export default function Welcome({
                     </a>
                 </div>
 
-                {currentlyRecruiting ? <RecruitmentForm deadlineDate={deadline}></RecruitmentForm> :
+                {currentlyRecruiting ? <RecruitmentForm positions={positions} deadlineDate={deadline}></RecruitmentForm> :
                     <div className={"font-mono text-lg"}>لا توجد اي مناظرة عمل في الوقت الحالي</div>}
             </div>
         </>

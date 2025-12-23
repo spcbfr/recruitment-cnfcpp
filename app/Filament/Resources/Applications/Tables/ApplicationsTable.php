@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\Applications\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -17,82 +19,34 @@ class ApplicationsTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('contest.name')
+                TextColumn::make('email')
+                    ->searchable(),
+                TextColumn::make('tel')
+                    ->searchable(),
+                TextColumn::make('status')
+                    ->badge()
                     ->searchable(),
                 TextColumn::make('position')
                     ->searchable(),
                 TextColumn::make("score")->sortable(),
-                TextColumn::make('gender')
-                    ->searchable(),
-                TextColumn::make('birth_date')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('birth_place')
-                    ->searchable(),
-                TextColumn::make('address')
-                    ->searchable(),
-                TextColumn::make('governorate')
-                    ->searchable(),
-                TextColumn::make('postal_code')
-                    ->sortable(),
-                TextColumn::make('cin')
-                    ->sortable(),
-                TextColumn::make('cin_date')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('social_security_type')
-                    ->searchable(),
-                TextColumn::make('cnss_number')
-                    ->sortable(),
-                TextColumn::make('tel')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email address')
-                    ->searchable(),
-                TextColumn::make('marital_status')
-                    ->searchable(),
-                TextColumn::make('military_status')
-                    ->searchable(),
-                TextColumn::make('spouse_name')
-                    ->searchable(),
-                TextColumn::make('spouse_profession')
-                    ->searchable(),
-                TextColumn::make('spouse_workplace')
-                    ->searchable(),
-                TextColumn::make('children_count')
-                    ->sortable(),
-                TextColumn::make('degree')
-                    ->searchable(),
-                TextColumn::make('specialty')
-                    ->searchable(),
-                TextColumn::make('graduation_year')
-                    ->sortable(),
-                TextColumn::make('equivalence_decision')
-                    ->searchable(),
-                TextColumn::make('equivalence_date')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('bac_average')
-                    ->sortable(),
-                TextColumn::make('bac_specialty')
-                    ->searchable(),
-                TextColumn::make('bac_year')
-                    ->sortable(),
-                TextColumn::make('grad_average')
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make("test_grade")->sortable(),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
+                Action::make("Passer")->action(function ($record) {
+                    $record->status = "passe";
+                    $record->save();
+                })->visible(fn ($record) => $record->status== "nouveau"),
+                Action::make("Noté Test")
+                    ->schema([
+                        TextInput::make("test_grade")->required()
+                    ])
+                    ->action(function ($record, $data) {
+                        $record->test_grade = $data['test_grade'];
+                        $record->save();
+                })->visible(fn ($record) => $record->status== "passe"),
                 ViewAction::make()
             ])
             ->toolbarActions([

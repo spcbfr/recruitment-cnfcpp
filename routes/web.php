@@ -9,7 +9,9 @@ Route::get('/', function ()  {
     $contest = \App\Models\Contest::query()->where('ends_at', '>', now())->first();
     $deadline = $contest->ends_at->toIso8601String();
 
+    $positions = \App\Models\Position::select('code')->get()->pluck('code')->toArray();
     return Inertia::render('welcome', [
+        'positions' => $positions,
         'deadline' => $deadline,
         'currentlyRecruiting' => true,
     ]);
@@ -27,7 +29,6 @@ Route::post('/apply', function (ApplicationRequest $request) {
     \App\Models\Application::create($validated);
     $password = \Illuminate\Support\Str::password(8);
     \App\Models\User::create(['email' => $validated['email'], 'password' => $password, 'name' => $validated['name']]);
-    Mail::to($validated['email'])->send(new ApplicationSuccessMail($validated));
 
     return Redirect::to('/success')->with(['data' => $validated]);
 
