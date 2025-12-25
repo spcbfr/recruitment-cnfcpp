@@ -41,6 +41,7 @@ class ApplicationRequest extends FormRequest
             'graduation_year' => 'required|integer|min:1900|max:2100',
             'equivalence_decision' => 'nullable:string|max:255',
             'equivalence_date' => 'required_with:equivalence_decision|nullable|date',
+            'agreement' => 'accepted',
 
             'bac_average' => 'required|numeric|max:20|min:9',
             'grad_average' => 'required|numeric|max:20|min:9',
@@ -83,6 +84,7 @@ class ApplicationRequest extends FormRequest
 
             'cin.required' => 'حقل رقم بطاقة التعريف الوطنية إلزامي.',
             'cin.unique' => 'تم استعمال رقم بطاقة التعريف من قبل',
+            'agreement.accepted' => 'يجب قبول شروط الخدمة',
             'cin.integer' => 'رقم بطاقة التعريف يجب أن يكون رقماً.',
             'cin.digits' => 'رقم بطاقة التعريف يجب أن يحتوي على 8 أرقام.',
 

@@ -15,6 +15,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
         return new Date(deadlineDate.deadlineDate);
     });
 
+    const [agreed, setAgreed] = useState(false);
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -442,7 +443,23 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                         </div>
                     </div>
                 </section>
-
+                <div className="md:col-span-12">
+                    <div className="p-4 rounded-lg border border-gray-200 bg-gray-50 flex items-center gap-3">
+                        <input
+                            type="checkbox"
+                            name="agreement"
+                            id="agreement"
+                            checked={agreed}
+                            onChange={(e) => setAgreed(e.target.checked)}
+                            disabled={timeLeft.isExpired}
+                            className="w-5 h-5 accent-primary-600"
+                        />
+                        <label htmlFor="agreement" className="text-sm text-gray-700 cursor-pointer">
+                            أشهد بصحة البيانات المذكورة أعلاه وأتحمل مسؤوليتي في حالة ثبوت عكس ذلك
+                            <span className="text-red-500">*</span>
+                        </label>
+                    </div>
+                </div>
                 {/* Footer Actions */}
                 <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-gray-500">

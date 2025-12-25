@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Requests\ApplicationRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,7 +31,7 @@ Route::post('/apply', function (ApplicationRequest $request) {
 
     $validated['contest_id'] = $contest->id;
 
-    \App\Models\Application::create($validated);
+    \App\Models\Application::create(Arr::except($validated, 'agreement'));
     $password = \Illuminate\Support\Str::password(8);
     \App\Models\User::create(['email' => $validated['email'], 'password' => $password, 'name' => $validated['name']]);
 
