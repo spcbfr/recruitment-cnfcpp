@@ -41,6 +41,9 @@ class ApplicationForm
                 TextInput::make('governorate')
                     ->label('الولاية')
                     ->required(),
+                TextInput::make('city')
+                    ->label('معتمدية')
+                    ->required(),
 
                 TextInput::make('postal_code')
                     ->label('الترقيم البريدي')

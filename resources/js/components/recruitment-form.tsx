@@ -55,7 +55,8 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
 
     return (
 
-        <Form  action="/apply" method="POST" className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <Form  action="/apply" method="POST"
+                className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-w-7xl mx-auto">
             {/* Header */}
             <div className="bg-gradient-to-l from-primary-800 to-primary-600 p-8 text-white text-center">
                 <h1 className="text-3xl font-extrabold mb-2">استمارة ترشح للمشاركة في مناظرة الخارجية لانتداب إطارات بعنوان سنة 2025</h1>
@@ -205,7 +206,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                 <div className="md:col-span-12">
                                     <h3 className="text-sm font-bold text-gray-700 mb-2">العنوان الشخصي</h3>
                                 </div>
-                                <div className="md:col-span-6">
+                                <div className="md:col-span-3">
                                     <InputGroup
                                         label="العنوان (النهج / الحي)"
                                         name="address"
@@ -216,6 +217,17 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                         disabled={timeLeft.isExpired}
                                     />
                                 </div>
+                                       <div className="md:col-span-3">
+                                        <InputGroup
+                                            label="المعتمدية"
+                                            name="city"              // 👈 backend field
+                                            value={data.city}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder="مثال: المنزه، سوسة المدينة..."
+                                            disabled={timeLeft.isExpired}
+                                        />
+                                    </div>
                                 <div className="md:col-span-3">
                                     <SelectGroup
                                         label="الولاية"
@@ -325,11 +337,11 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                 required
                                 disabled={timeLeft.isExpired}
                                 options={[
-                                    { value: 'license', label: 'إجازة' },
-                                    { value: 'master', label: 'ماجستير' },
-                                    { value: 'engineer', label: 'شهادة مهندس' },
-                                    { value: 'doctorate', label: 'دكتوراه' },
-                                    { value: 'technician', label: 'تقني سامي' },
+                                    { value: 'إجازة', label: 'إجازة' },
+                                    { value: 'ماجستير', label: 'ماجستير' },
+                                    { value: 'شهادة مهندس', label: 'شهادة مهندس' },
+                                    { value: 'دكتوراه', label: 'دكتوراه' },
+                                    { value: 'تقني سامي', label: 'تقني سامي' },
                                 ]}
                             />
                         </div>

@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Requests\ApplicationRequest;
-use App\Mail\ApplicationSuccessMail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function ()  {
+Route::get('/', function () {
     $contest = \App\Models\Contest::query()->where('ends_at', '>', now())->first();
     $deadline = $contest->ends_at->toIso8601String();
 
     $positions = \App\Models\Position::select('code')->get()->pluck('code')->toArray();
+
     return Inertia::render('welcome', [
         'positions' => $positions,
         'deadline' => $deadline,
@@ -17,7 +17,11 @@ Route::get('/', function ()  {
     ]);
 })->name('home');
 
-Route::view('/success', 'success');
+Route::get('/success', function () {
+    return Inertia::render('success', [
+        'data' => session('data') ?? [],
+    ]);
+});
 
 Route::post('/apply', function (ApplicationRequest $request) {
 

@@ -83,13 +83,13 @@
 
                 @php
                     $rows = [
-                        'المنصب' => $data['position'],
-                        'الاسم الكامل' => $data['name'],
+                        'رمز المناظرة المزمع المشاركة فيها' => $data['position'],
+                        'اسم ولقب' => $data['name'],
                         'الجنس' => $data['gender'],
                         'تاريخ الولادة' => $data['birth_date'],
-                        'العنوان' => $data['address'],
+                        'العنوان الحالي' => $data['address'],
                         'الولاية' => $data['governorate'],
-                        'الرمز البريدي' => $data['postal_code'],
+                        'الرقم البريدي' => $data['postal_code'],
                         'رقم بطاقة التعريف' => $data['cin'],
                         'تاريخ إصدار بطاقة التعريف' => $data['cin_date'],
                         'الهاتف' => $data['tel'],
@@ -110,7 +110,7 @@
         </div>
 
         <!-- Education -->
-        <h3 class="text-xl font-semibold text-gray-700 mt-10 mb-4">المؤهلات العلمية</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mt-10 mb-4">المستوى التعليمي</h3>
 
         <div class="overflow-x-auto">
             <table class="w-full text-right border border-gray-200 rounded-lg bg-white">
@@ -130,26 +130,24 @@
         </div>
 
         <!-- Bac -->
-        <h3 class="text-xl font-semibold text-gray-700 mt-10 mb-4">نتائج الباكالوريا والدراسة</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mt-10 mb-4">نتائج</h3>
 
         <div class="overflow-x-auto">
             <table class="w-full text-right border border-gray-200 rounded-lg bg-white">
                 <tbody class="divide-y divide-gray-200">
 
                 <tr><th class="py-3 px-4 bg-gray-100">معدل الباكالوريا</th><td class="py-3 px-4">{{ $data['bac_average'] }}</td></tr>
-                <tr><th class="py-3 px-4 bg-gray-100">المعدل النهائي في التخرج</th><td class="py-3 px-4">{{ $data['grad_average'] }}</td></tr>
+                <tr><th class="py-3 px-4 bg-gray-100">معدل سنة التخرج</th><td class="py-3 px-4">{{ $data['grad_average'] }}</td></tr>
 
                 </tbody>
             </table>
         </div>
-
+        <div class="mt-12 flex justify-start">
+    <div class="w-1/2 border-2 border-dashed border-gray-400 p-6 text-center">
+        <p class="text-gray-700 font-semibold mb-12">الإمضاء</p>
     </div>
+</div>
 
-    <div class="text-center mt-8 no-print">
-        <a href="{{ url('/') }}"
-           class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
-            العودة إلى الصفحة الرئيسية
-        </a>
     </div>
 
 </div>

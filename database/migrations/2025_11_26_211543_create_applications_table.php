@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('address');
             $table->string('governorate');
+            $table->string('city');
             $table->string('postal_code');
             $table->string('cin')->unique();
             $table->date('cin_date');

@@ -2,14 +2,16 @@
 
 namespace App\Filament\Resources\Applications;
 
-use App\Filament\Resources\Applications\Pages\CreateApplication;
-use App\Filament\Resources\Applications\Pages\EditApplication;
 use App\Filament\Resources\Applications\Pages\ListApplications;
+use App\Filament\Resources\Applications\Pages\ViewApplication;
 use App\Filament\Resources\Applications\Schemas\ApplicationForm;
 use App\Filament\Resources\Applications\Tables\ApplicationsTable;
 use App\Models\Application;
 use BackedEnum;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
@@ -17,8 +19,10 @@ use Filament\Tables\Table;
 class ApplicationResource extends Resource
 {
     protected static ?string $model = Application::class;
-    protected static ?string $modelLabel = "مطلب";
-    protected static ?string $pluralModelLabel = "مطالب";
+
+    protected static ?string $modelLabel = 'مطلب';
+
+    protected static ?string $pluralModelLabel = 'مطالب';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -34,6 +38,124 @@ class ApplicationResource extends Resource
         return ApplicationsTable::configure($table);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Section::make('المعلومات الشخصية')
+                    ->icon('heroicon-o-user')
+                    ->schema([
+                        Grid::make(3)->schema([
+                            TextEntry::make('name')
+                                ->label('الاسم الكامل'),
+
+                            TextEntry::make('gender')
+                                ->label('الجنس'),
+
+                            TextEntry::make('birth_date')
+                                ->label('تاريخ الميلاد')
+                                ->date(),
+                        ]),
+
+                        Grid::make(3)->schema([
+                            TextEntry::make('cin')
+                                ->label('رقم بطاقة التعريف'),
+
+                            TextEntry::make('cin_date')
+                                ->label('تاريخ الإصدار')
+                                ->date(),
+
+                            TextEntry::make('tel')
+                                ->label('رقم الهاتف'),
+                        ]),
+                    ]),
+                Section::make('معلومات المسابقة')
+                    ->icon('heroicon-o-trophy')
+                    ->schema([
+                        TextEntry::make('contest.name')
+                            ->label('المسابقة'),
+                        TextEntry::make('position')
+                            ->label('المنصب'),
+                        TextEntry::make('status')
+                            ->label('الحالة')
+                            ->badge()
+                            ->colors([
+                                'success' => 'accepted',
+                                'warning' => 'pending',
+                                'danger' => 'rejected',
+                            ]),
+                    ])
+                    ->columns(3),
+
+                Section::make('العنوان')
+                    ->icon('heroicon-o-map-pin')
+                    ->schema([
+                        Grid::make(4)->schema([
+                            TextEntry::make('address')
+                                ->label('العنوان'),
+
+                            TextEntry::make('governorate')
+                                ->label('الولاية'),
+
+                            TextEntry::make('city')
+                                ->label('المعتمدية'),
+
+                            TextEntry::make('postal_code')
+                                ->label('الترقيم البريدي'),
+                        ]),
+                    ]),
+
+                Section::make('المعلومات الأكاديمية')
+                    ->icon('heroicon-o-academic-cap')
+                    ->schema([
+                        Grid::make(3)->schema([
+                            TextEntry::make('degree')
+                                ->label('الشهادة'),
+
+                            TextEntry::make('specialty')
+                                ->label('الاختصاص'),
+
+                            TextEntry::make('graduation_year')
+                                ->label('سنة التخرج'),
+                        ]),
+
+                        Grid::make(3)->schema([
+                            TextEntry::make('equivalence_decision')
+                                ->label('قرار المعادلة'),
+
+                            TextEntry::make('equivalence_date')
+                                ->label('تاريخ المعادلة')
+                                ->date(),
+                        ]),
+                    ]),
+
+                Section::make('المعدلات')
+                    ->icon('heroicon-o-chart-bar')
+                    ->schema([
+                        Grid::make(3)->schema([
+                            TextEntry::make('bac_average')
+                                ->label('معدل البكالوريا'),
+
+                            TextEntry::make('grad_average')
+                                ->label('معدل التخرج'),
+                            TextEntry::make('score')
+                                ->label('مجموع النقاط'),
+                            TextEntry::make('test_grade')
+                                ->placeholder('لم يجتز الاختبار')
+                                ->label('اختبار الكفاءة'),
+                        ]),
+                    ]),
+
+                Section::make('معلومات الاتصال')
+                    ->icon('heroicon-o-envelope')
+                    ->schema([
+                        TextEntry::make('email')
+                            ->label('البريد الإلكتروني')
+                            ->copyable(),
+                    ]),
+            ]);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -45,6 +167,7 @@ class ApplicationResource extends Resource
     {
         return [
             'index' => ListApplications::route('/'),
+            'view' => ViewApplication::route('/{record}'),
         ];
     }
 }

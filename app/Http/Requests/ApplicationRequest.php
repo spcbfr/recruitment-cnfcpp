@@ -29,6 +29,7 @@ class ApplicationRequest extends FormRequest
             'birth_date' => 'required|date',
             'address' => 'required|string|max:500',
             'governorate' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
             'postal_code' => 'required|numeric|digits:4',
             'cin' => 'required|numeric|digits:8|unique:applications,cin',
             'cin_date' => 'required|date',

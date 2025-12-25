@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Observers\ApplicationScoreObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Application extends Model
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
     public function contest(): BelongsTo
     {
         return $this->belongsTo(Contest::class);
