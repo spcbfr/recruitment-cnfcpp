@@ -94,15 +94,6 @@ class ApplicationForm
                     ->required()
                     ->numeric(),
 
-                TextInput::make('bac_specialty')
-                    ->label('شعبة البكالوريا')
-                    ->required(),
-
-                TextInput::make('bac_year')
-                    ->label('سنة البكالوريا')
-                    ->required()
-                    ->numeric(),
-
                 TextInput::make('grad_average')
                     ->label('معدل التخرج')
                     ->required()

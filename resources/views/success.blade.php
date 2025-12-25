@@ -137,8 +137,6 @@
                 <tbody class="divide-y divide-gray-200">
 
                 <tr><th class="py-3 px-4 bg-gray-100">معدل الباكالوريا</th><td class="py-3 px-4">{{ $data['bac_average'] }}</td></tr>
-                <tr><th class="py-3 px-4 bg-gray-100">شعبة الباكالوريا</th><td class="py-3 px-4">{{ $data['bac_specialty'] }}</td></tr>
-                <tr><th class="py-3 px-4 bg-gray-100">سنة الباكالوريا</th><td class="py-3 px-4">{{ $data['bac_year'] }}</td></tr>
                 <tr><th class="py-3 px-4 bg-gray-100">المعدل النهائي في التخرج</th><td class="py-3 px-4">{{ $data['grad_average'] }}</td></tr>
 
                 </tbody>

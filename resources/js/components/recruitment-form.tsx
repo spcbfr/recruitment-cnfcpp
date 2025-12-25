@@ -182,6 +182,22 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                 disabled={timeLeft.isExpired}
                             />
                         </div>
+                            <div className="md:col-span-6">
+                                <InputGroup
+                                    label="معدل البكالوريا"
+                                    name="bac_average"
+                                    type="number"
+                                    step="0.01"
+                                    min={0}
+                                    max={20}
+                                    value={data.bac_average}
+                                    onChange={handleChange}
+                                    className="font-mono"
+                                    placeholder="--.--"
+                                    required
+                                    disabled={timeLeft.isExpired}
+                                />
+                            </div>
 
                         {/* Row 3: Address */}
                         <div className="md:col-span-12">
@@ -299,57 +315,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                 <section>
                     <SectionHeader number="III" title="المستوى التعليمي" />
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                        {/* Bac Info */}
-                        <div className="md:col-span-12 bg-blue-50 p-4 rounded-lg border border-blue-100 grid grid-cols-1 md:grid-cols-12 gap-4">
-                            <div className="md:col-span-12">
-                                <h3 className="text-sm font-bold text-blue-800 mb-1">بيانات البكالوريا</h3>
-                            </div>
-                            <div className="md:col-span-4">
-                                <SelectGroup
-                                    label="شعبة البكالوريا"
-                                    name="bac_specialty"
-                                    value={data.bac_specialty}
-                                    onChange={handleChange}
-                                    required
-                                    options={BAC_SPECIALTIES}
-                                    disabled={timeLeft.isExpired}
-                                />
-                            </div>
-                            <div className="md:col-span-4">
-                                <InputGroup
-                                    label="سنة الحصول عليها"
-                                    name="bac_year"
-                                    type="number"
-                                    min={1970}
-                                    max={new Date().getFullYear()}
-                                    value={data.bac_year}
-                                    onChange={handleChange}
-                                    required
-                                    disabled={timeLeft.isExpired}
-                                />
-                            </div>
-                            <div className="md:col-span-4">
-                                <InputGroup
-                                    label="معدل البكالوريا"
-                                    name="bac_average"
-                                    type="number"
-                                    step="0.01"
-                                    min={0}
-                                    max={20}
-                                    value={data.bac_average}
-                                    onChange={handleChange}
-                                    className="font-mono"
-                                    placeholder="--.--"
-                                    required
-                                    disabled={timeLeft.isExpired}
-                                />
-                            </div>
-                        </div>
 
-                        {/* University Info */}
-                        <div className="md:col-span-12 mt-4">
-                            <h3 className="text-sm font-bold text-gray-700 mb-3">بيانات الشهادة الجامعية</h3>
-                        </div>
                         <div className="md:col-span-12">
                             <SelectGroup
                                 label="الشهادة العلمية"
@@ -415,7 +381,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
 
                         <div className="md:col-span-12">
                             <InputGroup
-                                label="معدل أعداد سنة التخرج"
+                                label="معدل سنة التخرج"
                                 name="grad_average"
                                 type="number"
                                 step="0.01"
@@ -435,7 +401,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                  p-6 rounded-xl border transition-colors duration-300
                `}>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                    رقم الخطة المزمع المشاركة فيها <span className="text-red-500">*</span>
+                                   رقم المناظرة المزمع المشاركة فيها<span className="text-red-500">*</span>
                                 </label>
 
                                 <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
@@ -450,7 +416,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                 bg-white outline-none focus:ring-2
             `}
                                         >
-                                            <option value="">اختر رقم الخطة</option>
+                                            <option value="">اختر رقم مناظرة</option>
 
                                             {positions.map((position) => (
                                                 <option key={position} value={position}>

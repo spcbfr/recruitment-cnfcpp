@@ -42,8 +42,6 @@ class ApplicationRequest extends FormRequest
             'equivalence_date' => 'required_with:equivalence_decision|nullable|date',
 
             'bac_average' => 'required|numeric|max:20|min:9',
-            'bac_specialty' => 'required|string|max:255',
-            'bac_year' => 'required|integer|min:1900|max:2100',
             'grad_average' => 'required|numeric|max:20|min:9',
         ];
     }
@@ -122,15 +120,6 @@ class ApplicationRequest extends FormRequest
 
             'bac_average.required' => 'معدل البكالوريا إلزامي.',
             'bac_average.numeric' => 'معدل البكالوريا يجب أن يكون رقماً.',
-
-            'bac_specialty.required' => 'شعبة البكالوريا إلزامية.',
-            'bac_specialty.string' => 'شعبة البكالوريا يجب أن تكون نصاً.',
-            'bac_specialty.max' => 'شعبة البكالوريا يجب ألا تتجاوز 255 حرفاً.',
-
-            'bac_year.required' => 'سنة البكالوريا إلزامية.',
-            'bac_year.integer' => 'سنة البكالوريا يجب أن تكون رقماً.',
-            'bac_year.min' => 'سنة البكالوريا لا يمكن أن تكون أقل من 1900.',
-            'bac_year.max' => 'سنة البكالوريا لا يمكن أن تتجاوز 2100.',
 
             'grad_average.required' => 'معدل التخرج إلزامي.',
             'grad_average.numeric' => 'معدل التخرج يجب أن يكون رقماً.',

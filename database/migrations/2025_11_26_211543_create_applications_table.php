@@ -24,15 +24,13 @@ return new class extends Migration
             $table->string('tel');
             $table->integer('test_grade')->nullable();
             $table->string('email');
-            $table->string("status")->default("nouveau");
+            $table->string('status')->default('nouveau');
             $table->string('degree')->nullable();
             $table->string('specialty');
             $table->year('graduation_year');
             $table->string('equivalence_decision')->nullable();
             $table->date('equivalence_date')->nullable();
             $table->float('bac_average');
-            $table->string('bac_specialty');
-            $table->year('bac_year');
             $table->float('grad_average');
             $table->timestamps();
         });
