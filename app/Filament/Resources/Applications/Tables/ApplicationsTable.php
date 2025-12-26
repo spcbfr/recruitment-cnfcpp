@@ -3,13 +3,10 @@
 namespace App\Filament\Resources\Applications\Tables;
 
 use Filament\Actions\Action;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\TextInputColumn;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 class ApplicationsTable
@@ -42,17 +39,16 @@ class ApplicationsTable
                 TextColumn::make('score')
                     ->label('النتيجة')
                     ->sortable(),
-
-                TextInputColumn::make('test_grade')
-                    ->label('درجة الاختبار')
-                    ->placeholder("لا يمكن تعديل إلا إذا تم اختيار للاختبار.")
-                    ->rules(['max'])
-                    ->disabled(fn ($record) => $record->status == "nouveau")
-                    ->suffix("/20")
+                TextColumn::make('test_grade')
+                    ->label('نتيجة الاختبار')
                     ->sortable(),
+
             ])
             ->filters([
                 //
+            ])
+            ->groups([
+                Group::make('position')->label('الوظيفة'),
             ])
             ->recordActions([
                 Action::make('passer')
@@ -68,6 +64,9 @@ class ApplicationsTable
                     ->schema([
                         TextInput::make('test_grade')
                             ->label('درجة الاختبار')
+                            ->numeric()
+                            ->maxValue(20)
+                            ->minValue(0)
                             ->required(),
                     ])
                     ->action(function ($record, $data) {

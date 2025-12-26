@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Contests\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -27,6 +28,7 @@ class ContestForm
                     ->maxValue(100)
                     ->minValue(0)
                     ->required(),
+                TagsInput::make('degrees')->label('الشهادات العلمية'),
 
                 DateTimePicker::make('ends_at')
                     ->label('تاريخ ووقت غلق المسابقة')

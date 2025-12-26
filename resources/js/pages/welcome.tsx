@@ -4,6 +4,7 @@ import { RecruitmentForm } from '@/components/recruitment-form';
 export default function Welcome({
     deadline,
     currentlyRecruiting,
+    degrees,
     positions
 }: {
     deadline: string, currentlyRecruiting: boolean;
@@ -18,7 +19,7 @@ export default function Welcome({
             </Head>
             <div
                 className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 ">
-                {currentlyRecruiting ? <RecruitmentForm positions={positions} deadlineDate={deadline}></RecruitmentForm> :
+                {currentlyRecruiting ? <RecruitmentForm positions={positions} deadlineDate={deadline} degrees={degrees}></RecruitmentForm> :
                     <div className={"font-mono text-lg"}>لا توجد اي مناظرة عمل في الوقت الحالي</div>}
             </div>
         </>

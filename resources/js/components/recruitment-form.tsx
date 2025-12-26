@@ -11,6 +11,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
 
     // Countdown State
     positions = deadlineDate.positions;
+    let degrees = deadlineDate.degrees;
     const [deadline] = useState<Date>(() => {
         return new Date(deadlineDate.deadlineDate);
     });
@@ -184,22 +185,6 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                 disabled={timeLeft.isExpired}
                             />
                         </div>
-                            <div className="md:col-span-6">
-                                <InputGroup
-                                    label="معدل البكالوريا"
-                                    name="bac_average"
-                                    type="number"
-                                    step="0.01"
-                                    min={0}
-                                    max={20}
-                                    value={data.bac_average}
-                                    onChange={handleChange}
-                                    className="font-mono"
-                                    placeholder="--.--"
-                                    required
-                                    disabled={timeLeft.isExpired}
-                                />
-                            </div>
 
                         {/* Row 3: Address */}
                         <div className="md:col-span-12">
@@ -329,6 +314,21 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                     <SectionHeader number="III" title="المستوى التعليمي" />
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
+                            <div className="md:col-span-12">
+                                <InputGroup
+                                    label="معدل البكالوريا"
+                                    name="bac_average"
+                                    type="number"
+                                    step="0.01"
+                                    min={0}
+                                    max={20}
+                                    value={data.bac_average}
+                                    onChange={handleChange}
+                                    placeholder="--.--"
+                                    required
+                                    disabled={timeLeft.isExpired}
+                                />
+                            </div>
                         <div className="md:col-span-12">
                             <SelectGroup
                                 label="الشهادة العلمية"
@@ -337,13 +337,10 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                 onChange={handleChange}
                                 required
                                 disabled={timeLeft.isExpired}
-                                options={[
-                                    { value: 'إجازة', label: 'إجازة' },
-                                    { value: 'ماجستير', label: 'ماجستير' },
-                                    { value: 'شهادة مهندس', label: 'شهادة مهندس' },
-                                    { value: 'دكتوراه', label: 'دكتوراه' },
-                                    { value: 'تقني سامي', label: 'تقني سامي' },
-                                ]}
+                                options={degrees.map(degree => ({
+                                        value: degree,
+                                        label: degree,
+                                    }))}
                             />
                         </div>
                         <div className="md:col-span-8">
@@ -402,7 +399,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                 max={20}
                                 value={data.grad_average}
                                 onChange={handleChange}
-                                className="font-mono w-full md:w-1/3"
+                                className="w-full md:w-1/3"
                                 placeholder="--.--"
                                 disabled={timeLeft.isExpired}
                                 required

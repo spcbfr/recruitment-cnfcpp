@@ -84,7 +84,7 @@ class ApplicationRequest extends FormRequest
 
             'cin.required' => 'حقل رقم بطاقة التعريف الوطنية إلزامي.',
             'cin.unique' => 'تم استعمال رقم بطاقة التعريف من قبل',
-            'agreement.accepted' => 'يجب قبول شروط الخدمة',
+            'agreement.accepted' => 'يجب المصادقة على صحة البيانات',
             'cin.integer' => 'رقم بطاقة التعريف يجب أن يكون رقماً.',
             'cin.digits' => 'رقم بطاقة التعريف يجب أن يحتوي على 8 أرقام.',
 

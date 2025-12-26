@@ -3,8 +3,8 @@ import { Head } from '@inertiajs/react'
 
 export default function Success({ data = {} }) {
   const personalRows = {
-    'رمز المناظرة المزمع المشاركة فيها': data.position,
-    'اسم ولقب': data.name,
+    'رمز المناظرة المزمع المشاركة فيها': data.position.concat(" - ", data.position_name),
+    'الاسم واللقب': data.name,
     'الجنس': data.gender,
     'تاريخ الولادة': data.birth_date,
     'العنوان الحالي': data.address,
@@ -13,7 +13,7 @@ export default function Success({ data = {} }) {
     'الرقم البريدي': data.postal_code,
     'رقم بطاقة التعريف': data.cin,
     'تاريخ إصدار بطاقة التعريف': data.cin_date,
-    'الهاتف': data.tel,
+    'رقم الهاتف الجوال': data.tel,
     'البريد الإلكتروني': data.email,
   }
 
@@ -45,6 +45,7 @@ export default function Success({ data = {} }) {
 
         {/* Card */}
         <div className="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-3xl font-bold text-center">استمارة ترشح </h2>
 
           {/* Personal Info */}
           <h3 className="text-xl font-semibold text-gray-700 mb-4">
@@ -55,10 +56,10 @@ export default function Success({ data = {} }) {
             <tbody className="divide-y divide-gray-200">
               {Object.entries(personalRows).map(([label, value]) => (
                 <tr key={label} className="hover:bg-gray-50">
-                  <th className="py-3 px-4 font-medium text-gray-700 w-1/3 bg-gray-100">
+                  <th className="py-1 px-4 font-medium text-gray-700 w-1/3 bg-gray-100">
                     {label}
                   </th>
-                  <td className="py-3 px-4 text-gray-800">
+                  <td className="py-1 px-4 text-gray-800">
                     {value ?? ''}
                   </td>
                 </tr>
@@ -99,9 +100,7 @@ export default function Success({ data = {} }) {
           </table>
 
           {/* Results */}
-          <h3 className="text-xl font-semibold text-gray-700 mt-10 mb-4">
-            نتائج
-          </h3>
+          <h3 className="text-xl font-semibold text-gray-700 mt-10 mb-4">المعدالت المطلوبة</h3>
 
           <table className="w-full text-right border border-gray-200 rounded-lg bg-white">
             <tbody className="divide-y divide-gray-200">
