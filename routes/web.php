@@ -50,6 +50,7 @@ Route::get('/success', function () {
 
         // Results
         'bac_average' => '14.85',
+        'score' => '30',
         'grad_average' => '13.90',
     ];
 
@@ -68,6 +69,7 @@ Route::post('/apply', function (ApplicationRequest $request) {
 
     $app = \App\Models\Application::create(Arr::except($validated, 'agreement'));
     $validated['id'] = $app->id;
+    $validated['score'] = $app->score;
 
     $password = \Illuminate\Support\Str::password(8);
     \App\Models\User::create(['email' => $validated['email'], 'password' => $password, 'name' => $validated['name']]);

@@ -46,7 +46,10 @@ export default function Success({ data = {} }) {
         {/* Card */}
         <div className="bg-white shadow-md rounded-lg p-6 relative">
         <div className="absolute top-6 left-6 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
-              المترشح عدد #{data.id}
+            رقم التسجيل: {data.id}
+        </div>
+        <div className="absolute top-6 left-42 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
+            مجموع النقاط: {data.score}
         </div>
 
             <h2 class="text-3xl font-bold text-center">استمارة الترشح </h2>
@@ -105,9 +108,9 @@ export default function Success({ data = {} }) {
           <table className="w-full text-right border border-gray-200 rounded-lg bg-white">
             <tbody className="divide-y divide-gray-200">
               <tr>
-                <th className="py-3 px-4 bg-gray-100">معدل الباكالوريا</th>
+                <th className="py-3 px-4 font-bold bg-gray-100">معدل البكالوريا</th>
                 <td className="py-3 px-4">{data.bac_average}</td>
-                <th className="py-3 px-4 bg-gray-100">معدل سنة التخرج</th>
+                <th className="py-3 px-4 font-bold bg-gray-100">معدل سنة التخرج</th>
                 <td className="py-3 px-4">{data.grad_average}</td>
               </tr>
             </tbody>
