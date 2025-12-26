@@ -34,7 +34,7 @@ class ApplicationRequest extends FormRequest
             'cin' => 'required|numeric|digits:8|unique:applications,cin',
             'cin_date' => 'required|date',
             'tel' => 'required|string|max:8',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:applications,email',
 
             'degree' => 'nullable|string|max:255',
             'specialty' => 'required|string|max:255',
@@ -102,6 +102,7 @@ class ApplicationRequest extends FormRequest
             'email.required' => 'البريد الإلكتروني إلزامي.',
             'email.email' => 'صيغة البريد الإلكتروني غير صالحة.',
             'email.max' => 'البريد الإلكتروني يجب ألا يتجاوز 255 حرفاً.',
+            'email.unique' => 'تم استعمال البريد الالكتروني من قبل',
 
             'degree.string' => 'الشهـادة يجب أن تكون نصاً.',
             'degree.max' => 'الشهـادة يجب ألا تتجاوز 255 حرفاً.',

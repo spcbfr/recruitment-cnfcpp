@@ -256,7 +256,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                 onChange={handleChange}
                                 required
                                 placeholder="XXXXXXXX"
-                                className="tracking-widest font-mono text-left"
+                                className="tracking-widest font-mono text-left [&>input]:border-1 [&>input]:border-black"
                                 dir="ltr"
                                 disabled={timeLeft.isExpired}
                             />
@@ -326,6 +326,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                                     onChange={handleChange}
                                     placeholder="--.--"
                                     required
+                                    className="[&>input]:border-1 [&>input]:border-black"
                                     disabled={timeLeft.isExpired}
                                 />
                             </div>
