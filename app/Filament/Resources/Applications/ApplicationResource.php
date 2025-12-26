@@ -143,6 +143,10 @@ class ApplicationResource extends Resource
                             TextEntry::make('test_grade')
                                 ->placeholder('لم يجتز الاختبار')
                                 ->label('اختبار الكفاءة'),
+                            TextEntry::make('final')
+                                ->state(fn ($record) => $record->test_grade ? ($record->score + $record->test_grade) / 2 : null)
+                                ->placeholder('لم يجتز الاختبار')
+                                ->label('النتيجة النهائية'),
                         ]),
                     ]),
 

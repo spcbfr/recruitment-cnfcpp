@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('tel');
             $table->integer('test_grade')->nullable();
             $table->string('email');
-            $table->string('status')->default('nouveau');
+            $table->string('status')->default('جديد');
             $table->string('degree')->nullable();
             $table->string('specialty');
             $table->year('graduation_year');

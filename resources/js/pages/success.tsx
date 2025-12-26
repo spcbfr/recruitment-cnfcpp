@@ -48,11 +48,11 @@ export default function Success({ data = {} }) {
         <div className="absolute top-6 left-6 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
             رقم التسجيل: {data.id}
         </div>
-        <div className="absolute top-6 left-36 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
+        <div className="absolute top-6 right-6 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
             مجموع النقاط: {data.score}
         </div>
 
-            <h2 class="text-3xl font-bold text-center">استمارة الترشح </h2>
+            <h2 class="text-3xl mb-2 font-bold text-center">استمارة الترشح </h2>
 
           {/* Personal Info */}
           <h3 className="text-xl font-semibold text-gray-700 mb-4">
@@ -83,21 +83,21 @@ export default function Success({ data = {} }) {
             <tbody className="divide-y divide-gray-200">
               {data.degree && (
                 <tr>
-                  <th className="py-3 px-4 bg-gray-100">الشهادة</th>
-                  <td className="py-3 px-4">{data.degree}</td>
+                  <th className="py-1 px-4 bg-gray-100">الشهادة</th>
+                  <td className="py-1 px-4">{data.degree}</td>
                 </tr>
               )}
               <tr>
-                <th className="py-3 px-4 bg-gray-100">الاختصاص</th>
-                <td className="py-3 px-4">{data.specialty}</td>
+                <th className="py-1 px-4 bg-gray-100">الاختصاص</th>
+                <td className="py-1 px-4">{data.specialty}</td>
               </tr>
               <tr>
-                <th className="py-3 px-4 bg-gray-100">سنة التخرج</th>
-                <td className="py-3 px-4">{data.graduation_year}</td>
+                <th className="py-1 px-4 bg-gray-100">سنة التخرج</th>
+                <td className="py-1 px-4">{data.graduation_year}</td>
               </tr>
               <tr>
-                <th className="py-3 px-4 bg-gray-100">قرار وتاريخ المعادلة</th>
-                <td className="py-3 px-4">{data.equivalence_decision} - {data.equivalence_date}</td>
+                <th className="py-1 px-4 bg-gray-100">قرار وتاريخ المعادلة</th>
+                <td className="py-1 px-4">{data.equivalence_decision} - {data.equivalence_date}</td>
               </tr>
             </tbody>
           </table>
@@ -108,10 +108,10 @@ export default function Success({ data = {} }) {
           <table className="w-full text-right border border-gray-200 rounded-lg bg-white">
             <tbody className="divide-y divide-gray-200">
               <tr>
-                <th className="py-3 px-4 font-bold bg-gray-100">معدل البكالوريا</th>
-                <td className="py-3 px-4">{data.bac_average}</td>
-                <th className="py-3 px-4 font-bold bg-gray-100">معدل سنة التخرج</th>
-                <td className="py-3 px-4">{data.grad_average}</td>
+                <th className="py-1 px-4 font-bold bg-gray-100">معدل البكالوريا</th>
+                <td className="py-1 px-4">{data.bac_average}</td>
+                <th className="py-1 px-4 font-bold bg-gray-100">معدل سنة التخرج</th>
+                <td className="py-1 px-4">{data.grad_average}</td>
               </tr>
             </tbody>
           </table>

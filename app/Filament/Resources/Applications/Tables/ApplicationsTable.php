@@ -40,7 +40,13 @@ class ApplicationsTable
                     ->label('النتيجة')
                     ->sortable(),
                 TextColumn::make('test_grade')
+                    ->placeholder('لم يجتز الاختبار')
                     ->label('نتيجة الاختبار')
+                    ->sortable(),
+                TextColumn::make('final')
+                    ->state(fn ($record) => $record->test_grade ? ($record->score + $record->test_grade) / 2 : null)
+                    ->placeholder('لم يجتز الاختبار')
+                    ->label('النتيجة النهائية')
                     ->sortable(),
 
             ])
@@ -52,12 +58,12 @@ class ApplicationsTable
             ])
             ->recordActions([
                 Action::make('passer')
-                    ->label('اجتاز')
+                    ->label('قبول اولي')
                     ->action(function ($record) {
-                        $record->status = 'passe';
+                        $record->status = 'مقبول';
                         $record->save();
                     })
-                    ->visible(fn ($record) => $record->status === 'nouveau'),
+                    ->visible(fn ($record) => $record->status === 'جديد'),
 
                 Action::make('note_test')
                     ->label('تقييم الاختبار')
@@ -73,7 +79,7 @@ class ApplicationsTable
                         $record->test_grade = $data['test_grade'];
                         $record->save();
                     })
-                    ->visible(fn ($record) => $record->status === 'passe'),
+                    ->visible(fn ($record) => $record->status === 'مقبول'),
 
                 ViewAction::make()
                     ->label('عرض'),
