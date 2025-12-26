@@ -33,7 +33,7 @@ class ApplicationsTable
                     ->searchable(),
 
                 TextColumn::make('position')
-                    ->label('المنصب')
+                    ->label('الوظيفة')
                     ->searchable(),
 
                 TextColumn::make('score')

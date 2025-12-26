@@ -48,7 +48,7 @@ export default function Success({ data = {} }) {
         <div className="absolute top-6 left-6 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
             رقم التسجيل: {data.id}
         </div>
-        <div className="absolute top-6 left-42 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
+        <div className="absolute top-6 left-36 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
             مجموع النقاط: {data.score}
         </div>
 
