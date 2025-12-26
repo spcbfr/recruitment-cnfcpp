@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::get('/success', function () {
     $data = [
         'position' => '1',
+        'id' => '1',
         'position_name' => 'web developer',
 
         // Personal info
@@ -65,7 +66,9 @@ Route::post('/apply', function (ApplicationRequest $request) {
     $validated['contest_id'] = $contest->id;
     $validated['position_name'] = Position::where('code', $validated['position'])->first()->name;
 
-    \App\Models\Application::create(Arr::except($validated, 'agreement'));
+    $app = \App\Models\Application::create(Arr::except($validated, 'agreement'));
+    $validated['id'] = $app->id;
+
     $password = \Illuminate\Support\Str::password(8);
     \App\Models\User::create(['email' => $validated['email'], 'password' => $password, 'name' => $validated['name']]);
 

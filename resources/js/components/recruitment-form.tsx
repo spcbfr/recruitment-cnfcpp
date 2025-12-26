@@ -451,8 +451,8 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                             disabled={timeLeft.isExpired}
                             className="w-5 h-5 accent-primary-600"
                         />
-                        <label htmlFor="agreement" className="text-sm text-gray-700 cursor-pointer">
-                            أشهد بصحة البيانات المذكورة أعلاه وأتحمل مسؤوليتي في حالة ثبوت عكس ذلك
+                        <label htmlFor="agreement" className="text-sm text-red-600 cursor-pointer">
+                        لا يمكن تحيين البيانات بعد تأكيد الترشح
                             <span className="text-red-500">*</span>
                         </label>
                     </div>
@@ -460,8 +460,6 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                 {/* Footer Actions */}
                 <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-gray-500">
-                        أشهد بصحة البيانات المذكورة أعلاه
-                        وأتحمل مسؤوليتي في حالة ثبوت عكس ذلك
                     </p>
                     <button
                         type="submit"

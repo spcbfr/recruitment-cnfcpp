@@ -44,8 +44,12 @@ export default function Success({ data = {} }) {
         </div>
 
         {/* Card */}
-        <div className="bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-3xl font-bold text-center">استمارة ترشح </h2>
+        <div className="bg-white shadow-md rounded-lg p-6 relative">
+        <div className="absolute top-6 left-6 border-2 border-gray-800 px-4 py-2 text-center font-semibold text-gray-800 bg-white">
+              المترشح عدد #{data.id}
+        </div>
+
+            <h2 class="text-3xl font-bold text-center">استمارة الترشح </h2>
 
           {/* Personal Info */}
           <h3 className="text-xl font-semibold text-gray-700 mb-4">
@@ -89,26 +93,20 @@ export default function Success({ data = {} }) {
                 <td className="py-3 px-4">{data.graduation_year}</td>
               </tr>
               <tr>
-                <th className="py-3 px-4 bg-gray-100">قرار المعادلة</th>
-                <td className="py-3 px-4">{data.equivalence_decision}</td>
-              </tr>
-              <tr>
-                <th className="py-3 px-4 bg-gray-100">تاريخ قرار المعادلة</th>
-                <td className="py-3 px-4">{data.equivalence_date}</td>
+                <th className="py-3 px-4 bg-gray-100">قرار وتاريخ المعادلة</th>
+                <td className="py-3 px-4">{data.equivalence_decision} - {data.equivalence_date}</td>
               </tr>
             </tbody>
           </table>
 
           {/* Results */}
-          <h3 className="text-xl font-semibold text-gray-700 mt-10 mb-4">المعدالت المطلوبة</h3>
+          <h3 className="text-xl font-semibold text-gray-700 mt-10 mb-4">المعدلات المطلوبة</h3>
 
           <table className="w-full text-right border border-gray-200 rounded-lg bg-white">
             <tbody className="divide-y divide-gray-200">
               <tr>
                 <th className="py-3 px-4 bg-gray-100">معدل الباكالوريا</th>
                 <td className="py-3 px-4">{data.bac_average}</td>
-              </tr>
-              <tr>
                 <th className="py-3 px-4 bg-gray-100">معدل سنة التخرج</th>
                 <td className="py-3 px-4">{data.grad_average}</td>
               </tr>
