@@ -38,7 +38,13 @@ class ApplicationsTable
 
                 TextColumn::make('score')
                     ->label('النتيجة')
-                    ->sortable(),
+                    ->sortable(query: function ($query, string $direction) {
+                        return $query->orderByRaw(
+                            '(applications.bac_average * contests.bac_factor
+                + applications.grad_average * contests.grad_factor) '.$direction
+                        );
+                    })
+                    ->numeric(locale: 'en_US'),
                 TextColumn::make('test_grade')
                     ->placeholder('لم يجتز الاختبار')
                     ->label('نتيجة الاختبار')

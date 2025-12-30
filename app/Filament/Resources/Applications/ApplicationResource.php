@@ -7,6 +7,7 @@ use App\Filament\Resources\Applications\Pages\ViewApplication;
 use App\Filament\Resources\Applications\Schemas\ApplicationForm;
 use App\Filament\Resources\Applications\Tables\ApplicationsTable;
 use App\Models\Application;
+use App\Models\Position;
 use BackedEnum;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
@@ -14,6 +15,7 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class ApplicationResource extends Resource
@@ -35,7 +37,18 @@ class ApplicationResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return ApplicationsTable::configure($table);
+        return ApplicationsTable::configure($table)
+            ->filters([
+                SelectFilter::make('position')
+                    ->label('Position')
+                    ->options(fn () => Position::get()->pluck('name', 'code')
+                    )
+                    ->searchable(),
+            ])
+            ->modifyQueryUsing(function ($query) {
+                return $query->join('contests', 'contests.id', '=', 'applications.contest_id')
+                    ->select('applications.*');
+            });
     }
 
     public static function infolist(Schema $schema): Schema
