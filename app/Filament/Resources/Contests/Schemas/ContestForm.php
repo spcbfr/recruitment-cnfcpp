@@ -31,6 +31,7 @@ class ContestForm
                 TagsInput::make('degrees')->label('الشهادات العلمية'),
 
                 DateTimePicker::make('ends_at')
+                    ->format('Y-m-d H:i')
                     ->label('تاريخ ووقت غلق المسابقة')
                     ->required(),
             ]);
