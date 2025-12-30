@@ -9,6 +9,7 @@ use App\Filament\Resources\Applications\Tables\ApplicationsTable;
 use App\Models\Application;
 use App\Models\Position;
 use BackedEnum;
+use Carbon\Carbon;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
@@ -68,6 +69,9 @@ class ApplicationResource extends Resource
                             TextEntry::make('birth_date')
                                 ->label('تاريخ الميلاد')
                                 ->date(),
+                            TextEntry::make('age')
+                                ->label('العمر')
+                                ->state(fn ($record) => Carbon::parse($record->birth_date)->age.' سنة'),
                         ]),
 
                         Grid::make(3)->schema([
