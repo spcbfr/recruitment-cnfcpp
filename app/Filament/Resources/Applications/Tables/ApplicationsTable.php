@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Applications\Tables;
 
 use App\Filament\Exports\ApplicationExporter;
+use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
@@ -24,17 +25,19 @@ class ApplicationsTable
                 TextColumn::make('name')
                     ->label('الاسم')
                     ->searchable(
-                        query: fn ($query, string $search): \Illuminate\Database\Eloquent\Builder =>
-                        $query->where('applications.name', 'like', "%{$search}%")
+                        query: fn ($query, string $search): \Illuminate\Database\Eloquent\Builder => $query->where('applications.name', 'like', "%{$search}%")
                     ),
 
-        TextColumn::make('email')
+                TextColumn::make('email')
                     ->label('البريد الإلكتروني')
                     ->searchable(),
 
                 TextColumn::make('tel')
                     ->label('رقم الهاتف')
                     ->searchable(),
+                TextColumn::make('age')
+                    ->label('العمر')
+                    ->state(fn ($record) => Carbon::parse($record->birth_date)->age.' سنة'),
 
                 TextColumn::make('status')
                     ->label('الحالة')

@@ -55,7 +55,7 @@ Route::get('/success', function () {
     ];
 
     return Inertia::render('success', [
-        'data' => session('data') ?? $data,
+        'data' => session('data') ?? [],
     ]);
 });
 
