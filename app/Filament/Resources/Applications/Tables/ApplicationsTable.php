@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Applications\Tables;
 
+use App\Filament\Exports\ApplicationExporter;
 use Filament\Actions\Action;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
@@ -14,6 +16,10 @@ class ApplicationsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(ApplicationExporter::class),
+            ])
             ->columns([
                 TextColumn::make('name')
                     ->label('الاسم')
