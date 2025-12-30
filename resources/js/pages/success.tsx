@@ -10,9 +10,9 @@ export default function Success({ data = {} }) {
     'العنوان الحالي': data.address,
     'المعتمدية': data.city,
     'الولاية': data.governorate,
-    'الرقم البريدي': data.postal_code,
-    'رقم بطاقة التعريف': data.cin,
-    'تاريخ إصدار بطاقة التعريف': data.cin_date,
+    'الترقيم البريدي': data.postal_code,
+    'رقم بطاقة التعريف الوطنية': data.cin,
+    'تاريخ إصدار بطاقة التعريف الوطنية': data.cin_date,
     'رقم الهاتف الجوال': data.tel,
     'البريد الإلكتروني': data.email,
   }
@@ -83,7 +83,7 @@ export default function Success({ data = {} }) {
             <tbody className="divide-y divide-gray-200">
               {data.degree && (
                 <tr>
-                  <th className="py-1 px-4 bg-gray-100">الشهادة</th>
+                  <th className="py-1 px-4 bg-gray-100">الشهادة العلمية</th>
                   <td className="py-1 px-4">{data.degree}</td>
                 </tr>
               )}

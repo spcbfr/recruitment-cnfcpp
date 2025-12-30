@@ -61,7 +61,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                 className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-w-7xl mx-auto">
             {/* Header */}
             <div className="bg-gradient-to-l from-primary-800 to-primary-600 p-8 text-white text-center">
-                <h1 className="text-3xl font-extrabold mb-2">استمارة ترشح للمشاركة في مناظرة الخارجية لانتداب إطارات بعنوان سنة 2025</h1>
+                <h1 className="text-3xl font-extrabold mb-2">استمارة ترشح للمشاركة في المناظرة الخارجية لانتداب إطارات بعنوان سنة 2025</h1>
                 <p className="opacity-90">الرجاء تعمير البيانات المطلوبة بكلّ دقة باللغة
 
                     العربية ثم المصادقة عليها.
@@ -412,7 +412,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                  p-6 rounded-xl border transition-colors duration-300
                `}>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                   رقم المناظرة المزمع المشاركة فيها<span className="text-red-500">*</span>
+                                   رمز المناظرة المزمع المشاركة فيها<span className="text-red-500">*</span>
                                 </label>
 
                                 <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
@@ -427,7 +427,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                 bg-white outline-none focus:ring-2
             `}
                                         >
-                                            <option value="">اختر رقم مناظرة</option>
+                                            <option value="">اختر رمز مناظرة</option>
 
                                             {positions.map((position) => (
                                                 <option key={position} value={position}>

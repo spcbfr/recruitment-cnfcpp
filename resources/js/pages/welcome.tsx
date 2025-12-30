@@ -13,7 +13,7 @@ export default function Welcome({
     console.log(positions);
     return (
         <>
-            <Head title="Welcome">
+            <Head title="">
                 <link rel="preconnect" href="https://fonts.bunny.net"/>
                 <link href="https://fonts.bunny.net/css?family=tajawal:200,300,400,500,700,800,900" rel="stylesheet" />
             </Head>
