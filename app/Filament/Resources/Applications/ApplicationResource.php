@@ -82,11 +82,11 @@ class ApplicationResource extends Resource
                                 ->label('رقم الهاتف'),
                         ]),
                     ]),
-                Section::make('معلومات المسابقة')
+                Section::make('معلومات المناظرة')
                     ->icon('heroicon-o-trophy')
                     ->schema([
                         TextEntry::make('contest.name')
-                            ->label('المسابقة'),
+                            ->label('المناظرة'),
                         TextEntry::make('position')
                             ->label('المنصب'),
                         TextEntry::make('status')

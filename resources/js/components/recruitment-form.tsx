@@ -427,7 +427,7 @@ export const RecruitmentForm: React.FC = (deadlineDate, positions) => {
                 bg-white outline-none focus:ring-2
             `}
                                         >
-                                            <option value="">اختر رمز مناظرة</option>
+                                            <option value="">اختر رمز المناظرة</option>
 
                                             {positions.map((position) => (
                                                 <option key={position} value={position}>

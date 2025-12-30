@@ -23,9 +23,12 @@ class ApplicationsTable
             ->columns([
                 TextColumn::make('name')
                     ->label('الاسم')
-                    ->searchable(),
+                    ->searchable(
+                        query: fn ($query, string $search): \Illuminate\Database\Eloquent\Builder =>
+                        $query->where('applications.name', 'like', "%{$search}%")
+                    ),
 
-                TextColumn::make('email')
+        TextColumn::make('email')
                     ->label('البريد الإلكتروني')
                     ->searchable(),
 
@@ -71,11 +74,23 @@ class ApplicationsTable
             ->recordActions([
                 Action::make('passer')
                     ->label('قبول اولي')
+                    ->requiresConfirmation()
                     ->action(function ($record) {
                         $record->status = 'مقبول';
+
                         $record->save();
                     })
                     ->visible(fn ($record) => $record->status === 'جديد'),
+                Action::make('revert')
+                    ->label('إلغاء القبول')
+                    ->color('danger')
+                    ->icon('heroicon-o-arrow-uturn-left')
+                    ->action(function ($record) {
+                        $record->test_grade = null;
+                        $record->status = 'جديد';
+                        $record->save();
+                    })
+                    ->visible(fn ($record) => $record->status === 'مقبول'),
 
                 Action::make('note_test')
                     ->label('تقييم الاختبار')
