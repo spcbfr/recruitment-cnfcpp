@@ -53,7 +53,7 @@ export default function Success({ data = {} }) {
         </div>
 
             <h2 class="text-3xl mb-2 font-bold text-center">استمارة الترشح </h2>
-            <h2 class="text-3xl mb-2 font-bold text-center">المناظرة الخارجية للمركز الوطني للتكوين المستمر والترقية المهنية</h2>
+            <h2 class="text-lg mb-2 font-bold text-center">المناظرة الخارجية للمركز الوطني للتكوين المستمر والترقية المهنية</h2>
 
           {/* Personal Info */}
           <h3 className="text-xl font-semibold text-gray-700 mb-4">
