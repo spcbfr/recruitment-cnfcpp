@@ -45,6 +45,9 @@ class ApplicationExporter extends Exporter
             ExportColumn::make('postal_code')
                 ->label('الترقيم البريدي'),
 
+            ExportColumn::make('score')
+                ->label('النتيجة'),
+
             ExportColumn::make('cin')
                 ->label('رقم بطاقة التعريف'),
 
