@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
+
     $contest = \App\Models\Contest::query()->where('ends_at', '>', now())->first();
+    if ($contest == null) {
+        return view('end');
+    }
     $deadline = $contest->ends_at->toIso8601String();
 
     $positions = \App\Models\Position::select('code')->get()->pluck('code')->toArray();
