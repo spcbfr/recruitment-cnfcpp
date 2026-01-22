@@ -11,6 +11,8 @@
 <body>
     <!-- Contest Header -->
     <div class="contest-header">
+
+        <img src="cnfcpp.png" width="100" style="margin: 0 auto" />
         <h1>
             استمارة ترشح للمشاركة في المناظرة الخارجية لانتداب إطارات بعنوان سنة 2025
         </h1>
@@ -37,9 +39,9 @@
             </div>
 
             <div class="deadline-text">
-                <p class="deadline-label">انتهت فترة التسجيل</p>
+                <p class="deadline-label ">انتهت فترة التسجيل</p>
                 <p class="deadline-date">
-                    23:59 الاربعاء 21 جانفي 2025
+                    الاربعاء 21 جانفي 2025 على الساعة 23:59
                 </p>
             </div>
         </div>
@@ -223,6 +225,16 @@
         #root,
         #__next {
             isolation: isolate;
+        }
+
+        .blink {
+            animation: blinker 1s step-start infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
         }
     </style>
 
