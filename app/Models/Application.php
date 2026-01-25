@@ -24,7 +24,7 @@ class Application extends Model
             get: fn (mixed $value, array $attributes) => round(
                 $attributes['bac_average'] * $this->contest->bac_factor
                 + $attributes['grad_average'] * $this->contest->grad_factor,
-                2
+                3
             )
         );
     }
